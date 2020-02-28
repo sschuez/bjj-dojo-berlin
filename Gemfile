@@ -9,6 +9,8 @@ gem 'puma'
 gem 'rails', '6.0.2.1'
 gem 'redis'
 gem 'faker'
+gem 'remotipart', github: 'mshibuya/remotipart'
+gem 'rails_admin', '>= 1.0.0.rc'
 
 gem 'autoprefixer-rails'
 gem 'font-awesome-sass', '~> 5.6.1'

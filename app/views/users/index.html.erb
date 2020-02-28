@@ -1,5 +1,6 @@
 <div class="container">
 	
+	<!-- Search bar -->
 	<%= simple_form_for :search, url: root_path, method: :get do |f| %>
 	  <div class="search-form-control form-group">
 	    <input class="form-control string required" type="text" name="search[query]" id="search_query" />
@@ -12,23 +13,17 @@
 	<!-- Titles for cards -->
 	<div class="row align-items-center mt-1">
 		
-		<div class="col-1 py-3">
+		<div class="col-2 py-3">
 	      <strong></strong>
 	   </div>
-	   <div class="col-1 py-3 border-right">
-	      <strong>#</strong>
-	   </div>
-		<div class="col-2 py-3 border-right">
+		<div class="col-4 py-3 border-right">
 	      <strong>First Name</strong>
 	   </div>
-	   <div class="col-2 py-3 border-right">
+	   <div class="col-3 py-3 border-right">
 	      <strong>Last Name</strong>
 	   </div>
-	   <div class="col-2 py-3 border-right">
+	   <div class="col-3 py-3">
 	      <strong>Belt</strong>
-	   </div>
-	   <div class="col-4 py-3">
-	      <strong>We'll add whatever is relevant</strong>
 	   </div>
 	   
 	</div>
@@ -37,26 +32,20 @@
 	<% @users.each do |user| %>
 		<%= link_to user_path(user) do %>
 	  <div class="row align-items-center mt-1 border bg-light">
-	    <div class="col-1 py-3">
+	    
+	    <div class="col-2 py-3">
 	      <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar", alt: "avatar" %>
 	    </div>
-	    <div class="col-1 py-3 border-right">
-	      <%= user.id %>
-	    </div>
-	    <div class="col-2 py-3 border-right">
+	    <div class="col-4 py-3 border-right">
 	      <%= user.first_name %>
 	    </div>
-	    <div class="col-2 py-3 border-right">
+	    <div class="col-3 py-3 border-right">
 	      <%= user.last_name %>
 	    </div>
-	    <div class="col-2 py-3 border-right">
+	    <div class="col-3 py-3">
 	      <%= user.belt %>
 	    </div>
-	    <div class="col-4 py-3">
-	      We'll add whatever is relevant
-	      <%#= link_to user_path(user) %>  
-	      <%#= link_to edit_user_registration_path, class: "btn btn-secondary" %>
-	    </div>
+	  
 	  </div>
 	  <% end %>
   <% end %>

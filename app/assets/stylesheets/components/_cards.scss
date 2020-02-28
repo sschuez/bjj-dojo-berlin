@@ -36,10 +36,49 @@
   padding: 16px;
 }
 
-.user-admin{
+#name-card{
+	position: relative;
+}
+
+#name-card .user-admin{
 	text-align: center;
+	border-radius: 50%;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	right: 15px;
+	top: 12px;
+	background-color: $green;
 	h2{
 		color: white;
-		font-size: 15px;
+		font-size: 12px;
 	}
+}
+
+#name-card .student-admin{
+	text-align: center;
+	border-radius: 50%;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+	height: 50px;
+	width: 50px;
+	position: absolute;
+	right: 15px;
+	top: 12px;
+	background-color: $cyan;
+	h2{
+		color: white;
+		font-size: 12px;
+	}
+}
+.badge-admin{
+	text-decoration: none;
+	padding-top: 17px;
+	margin: none;
+}
+
+.badge-student{
+	text-decoration: none;
+	padding-top: 17px;
+	margin: none;
 }

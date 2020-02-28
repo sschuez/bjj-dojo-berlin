@@ -55,6 +55,7 @@
 	        <p class="card-text">Profile created: <%= @user.created_at.strftime("%d.%m.%Y") %></p>
 
 	        <p class="card-text">Active: <%= @user.active_member %></p>
+	        <p class="card-text">Why (not active): <%= @user.not_active_why %></p>
 	      </div>
 	    </div>
 	  </div>

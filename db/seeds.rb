@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-belts = ['white_1', 'white_2', 'white_3', 'white_4', 'blue_1', 'blue_2', 'blue_3', 'blue_4', 'purple_1', 'purple_2', 'purple_3', 'purple_4', 'brown_1', 'brown_2', 'brown_3', 'brown_4', 'black_1', 'black_2', 'black_3', 'black_4']
+belts = ['white_1', 'white_2', 'white_3', 'white_4', 'blue_1', 'blue_2', 'blue_3', 'blue_4', 'purple_1', 'purple_2', 'purple_3', 'purple_4', 'brown_1', 'brown_2', 'brown_3', 'brown_4', 'black_1']
 
 puts 'Deleting all users...'
 User.destroy_all if Rails.env == "DEVELOPMENT"

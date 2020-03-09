@@ -3,7 +3,7 @@
 	<!-- Card with name, avatar and email -->
 	<div class="row align-items-center bg-white py-3 rounded-lg shadow-sm" id="name-card">
     <!-- Avatar -->
-    <div class="col-3 mb-3 ml-1">
+    <div class="col-3 ml-1">
       <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
     </div>
     
@@ -36,21 +36,51 @@
 	      <div class="card-body">
 	        <h5 class="card-title"><strong>Personal Info</strong></h5>
 	        <br>
-	        <p class="card-text">Birthday: <%= @user.date_of_birth.strftime("%d.%m.%Y") %></p>
-	        <p class="card-text">Age: <%= @user.age? %></p>
-	        <p class="card-text">Phone: <%= @user.phone %></p>
+	        <p class="card-text">
+	        	Birthday: <% if @user.date_of_birth == nil %>
+	        		<span class="n-a"><%= "n/a" %></span>
+						<% else %>
+	        		<%= @user.date_of_birth.strftime("%d.%m.%Y") %>
+	        	<% end %>
+	        	</p>
+	        <p class="card-text">
+	        	Age: <% if @user.date_of_birth == nil %>
+	        		<span class="n-a"><%= "n/a" %></span>
+						<% else %>
+	        		<%= @user.age? %>
+	        	<% end %>
+	        	</p>
+	        <p class="card-text">
+	        	Phone: <% if @user.phone == "" %>
+	        		<span class="n-a"><%= "n/a" %></span>
+	        	<% else %> 
+	        		<%= @user.phone %>
+	        	<% end %>
+	        	</p>
 	      </div>
 	    </div>
 	  </div>
 	   
-		<!-- Club details -->
+		<!-- Club affilitation -->
 		<div class="col mb-4">
 	    <div class="card border-0 b rounded-lg shadow-sm">
 	      <div class="card-body">
 	        <h5 class="card-title"><strong>Club affiliation</strong></h5>
 	        <br>
-	        <p class="card-text">Member since: <%= @user.started.strftime("%d.%m.%Y") %></p>
-	        <p class="card-text">Joined <strong><%= @user.date_diff(@user.started, Date.today) %></strong> ago</p>
+	        <p class="card-text">
+	        	Member since: <% if @user.started == nil %>
+							<span class="n-a"><%= "n/a" %></span>
+						<% else %>
+	        		<%= @user.started.strftime("%d.%m.%Y") %>
+	        	<% end %>
+	        		</p>
+	        <p class="card-text">
+	        	Joined: <% if @user.started == nil %>
+	        		<span class="n-a"><%= "n/a" %></span>
+	        	<% else %>
+	        		<strong><%= @user.date_diff(@user.started, Date.today) %></strong> ago
+						<% end %>
+	        	</p>
 	        <p class="card-text">Profile created: <%= @user.created_at.strftime("%d.%m.%Y") %></p>
 
 					<!-- <div class="custom-control custom-switch">
@@ -70,9 +100,27 @@
 	      <div class="card-body">
 	        <h5 class="card-title"><strong>BJJ level</strong></h5>
 	        <br>
-	        <p class="card-text">Belt: <%= @user.belt %></p>
-	        <p class="card-text">Last promotion: <%= @user.last_promotion.strftime("%d.%m.%Y") %></p>
-	        <p class="card-text">Promoted <strong><%= @user.date_diff(@user.last_promotion, Date.today) %></strong> ago</p>
+	        <p class="card-text">
+	        	Belt: <% if @user.belt == "" %>
+	        		<span class="n-a"><%= "n/a" %></span>
+	        	<% else %>
+	        		<%= @user.belt %>
+	        	<% end %>
+	        	</p>
+	        <p class="card-text">
+	        	Last promotion: <% if @user.last_promotion == nil %>
+	        		<span class="n-a"><%= "n/a" %></span>
+						<% else %>
+	        		<%= @user.last_promotion.strftime("%d.%m.%Y") %>
+	        	<% end %>
+	        	</p>
+	        <p class="card-text">
+	        	Promoted <% if @user.last_promotion == nil %>
+							<span class="n-a"><%= "n/a" %></span>
+						<% else %>
+	        		<strong><%= @user.date_diff(@user.last_promotion, Date.today) %></strong> ago
+						<% end %>
+	        	</p>
 	      </div>
 	    </div>
 	  </div>
@@ -83,9 +131,27 @@
 	      <div class="card-body">
 	        <h5 class="card-title"><strong>Measurements</strong></h5>
 	        <br>
-	        <p class="card-text">Height: <%= @user.height %></p>
-	        <p class="card-text">Weight: <%= @user.weight %></p>
-	        <p class="card-text">Weight good: <%= @user.weight_good %></p>
+	        <p class="card-text">
+	        	Height: <% if @user.height == nil %>
+	        		<span class="n-a"><%= "n/a" %></span>
+	        	<% else %>
+	        		<%= @user.height %>
+	        	<% end %>
+	        	</p>
+	        <p class="card-text">
+	        	Weight: <% if @user.weight == nil %>
+	        		<span class="n-a"><%= "n/a" %></span>
+	        	<% else %>
+	        		<%= @user.weight %>
+	        	<% end %>
+	        	</p>
+	        <p class="card-text">
+	        	Weight good: <% if @user.weight_good == nil %>
+	        		<span class="n-a"><%= "n/a" %></span>
+	        	<% else %>
+	        		<%= @user.weight_good %>
+	        	<% end %>
+	        	</p>
 	        <p class="card-text">Reasons: <%= @user.reasons_for_weight %></p>
 	      </div>
 	    </div>

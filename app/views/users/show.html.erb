@@ -42,8 +42,7 @@
 	      </div>
 	    </div>
 	  </div>
-	  
-	  
+	   
 		<!-- Club details -->
 		<div class="col mb-4">
 	    <div class="card border-0 b rounded-lg shadow-sm">
@@ -54,13 +53,11 @@
 	        <p class="card-text">Joined <strong><%= @user.date_diff(@user.started, Date.today) %></strong> ago</p>
 	        <p class="card-text">Profile created: <%= @user.created_at.strftime("%d.%m.%Y") %></p>
 
-					<div class="custom-control custom-switch">
+					<!-- <div class="custom-control custom-switch">
 					  <input type="checkbox" class="custom-control-input active" id="customSwitch1" checked>
 					  <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-					</div>
+					</div> -->
 					
-					
-
 	        <p class="card-text">Active: <%= @user.active_member %></p>
 	        <p class="card-text">Why (not active): <%= @user.not_active_why %></p>
 	      </div>

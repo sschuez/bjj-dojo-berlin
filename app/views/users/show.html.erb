@@ -1,5 +1,23 @@
 <div class="container">
-
+	
+	<!-- Icons edit & delete top -->
+	<div class="icons-top">
+		<div class="icon-edit">
+		<%= link_to edit_user_path(@user), class: "btn" do %>
+		  <i class="fas fa-edit"></i>
+		<% end %>
+		</div>
+		
+		<div class="icon-delete">
+			<%= link_to user_path(@user),
+			      method: :delete,
+			      data: { confirm: "Are you sure you want to delete user #{@user.first_name.upcase} #{@user.last_name.upcase}?" },
+			      class: "btn" do %>
+					<i class="fas fa-trash-alt"></i>
+			<% end %>
+		</div>
+	</div>
+	
 	<!-- Card with name, avatar and email -->
 	<div class="row align-items-center bg-white py-3 rounded-lg shadow-sm" id="name-card">
     <!-- Avatar -->
@@ -51,7 +69,7 @@
 	        	<% end %>
 	        	</p>
 	        <p class="card-text">
-	        	Phone: <% if @user.phone == "" %>
+	        	Phone: <% if @user.phone == "" || @user.phone == nil %>
 	        		<span class="n-a"><%= "n/a" %></span>
 	        	<% else %> 
 	        		<%= @user.phone %>
@@ -82,13 +100,13 @@
 						<% end %>
 	        	</p>
 	        <p class="card-text">Profile created: <%= @user.created_at.strftime("%d.%m.%Y") %></p>
-
-					<!-- <div class="custom-control custom-switch">
-					  <input type="checkbox" class="custom-control-input active" id="customSwitch1" checked>
-					  <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-					</div> -->
-					
-	        <p class="card-text">Active: <%= @user.active_member %></p>
+	        <p class="card-text">
+	        	Active: <% if @user.active_member == true %>
+	        		<i class="fas fa-check-circle"></i>
+	        	<% else %>
+	        		<i class="fas fa-times-circle"></i>
+	        	<% end %>
+	        </p>
 	        <p class="card-text">Why (not active): <%= @user.not_active_why %></p>
 	      </div>
 	    </div>
@@ -101,7 +119,7 @@
 	        <h5 class="card-title"><strong>BJJ level</strong></h5>
 	        <br>
 	        <p class="card-text">
-	        	Belt: <% if @user.belt == "" %>
+	        	Belt: <% if @user.belt == "" || @user.belt == nil %>
 	        		<span class="n-a"><%= "n/a" %></span>
 	        	<% else %>
 	        		<%= @user.belt %>
@@ -132,24 +150,26 @@
 	        <h5 class="card-title"><strong>Measurements</strong></h5>
 	        <br>
 	        <p class="card-text">
-	        	Height: <% if @user.height == nil %>
+	        	Height: <% if @user.height == nil || @user.height == "" %>
 	        		<span class="n-a"><%= "n/a" %></span>
 	        	<% else %>
-	        		<%= @user.height %>
+	        		<%= @user.height %> cm
 	        	<% end %>
 	        	</p>
 	        <p class="card-text">
-	        	Weight: <% if @user.weight == nil %>
+	        	Weight: <% if @user.weight == nil || @user.weight == "" %>
 	        		<span class="n-a"><%= "n/a" %></span>
 	        	<% else %>
-	        		<%= @user.weight %>
+	        		<%= @user.weight %> kg
 	        	<% end %>
 	        	</p>
 	        <p class="card-text">
 	        	Weight good: <% if @user.weight_good == nil %>
 	        		<span class="n-a"><%= "n/a" %></span>
+	        	<% elsif @user.weight_good == true %>
+	        		<i class="fas fa-check-circle"></i>
 	        	<% else %>
-	        		<%= @user.weight_good %>
+	        		<i class="fas fa-times-circle"></i>
 	        	<% end %>
 	        	</p>
 	        <p class="card-text">Reasons: <%= @user.reasons_for_weight %></p>
@@ -164,21 +184,35 @@
 	<% if current_user.admin? %>
 
 	<h4 class="ml-3"><strong>Comments</strong></h4>
-		<% @user.comments.each do |comment| %>
-			<div class="row row-cols-1 row-cols-sm-1">
-				<div class="col mb-4">
-					<div class="card border-0 b rounded-lg shadow-sm">
-						<div class="card-body">
-													
-							<h5><strong><%= comment.category %>:</strong></h5>
-							<p><%= comment.content %></p>
+		<% if @user.comments.empty? %>
+			<p><%= "No comments yet" %> <%= link_to edit_user_path(@user), class: "btn" do %>
+				<i class="fas fa-plus-square"></i>
+				<% end %>
 
-						</div>	
+			 </p>
+		<% else %>
+			<% @user.comments.each do |comment| %>
+				<div class="row row-cols-1 row-cols-sm-1">
+					<div class="col mb-4">
+						<div class="card border-0 b rounded-lg shadow-sm">
+							<div class="card-body">
+														
+								<h5><strong><%= comment.category %>:</strong></h5>
+								<p><%= comment.content %></p>
+
+							</div>	
+						</div>
 					</div>
 				</div>
-			</div>
+			<% end %>
 		<% end %>
 	<% end %>
+
+	<%= link_to "Edit Profile", edit_user_path(@user), class: "btn btn-warning px-4" %>
+	<%= link_to "Delete Profile", user_path(@user),
+	      method: :delete,
+	      data: { confirm: "Are you sure you want to delete user #{@user.first_name.upcase} #{@user.last_name.upcase}?" },
+	      class: "btn btn-danger" %>
 
 </div>
 

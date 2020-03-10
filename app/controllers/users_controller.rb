@@ -25,6 +25,14 @@ class UsersController < ApplicationController
 		redirect_to user_path(@user) 
 	end
 
+	def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+
+    # no need for app/views/users/destroy.html.erb
+    redirect_to users_path
+	end
+
 	private
 
   def user_params

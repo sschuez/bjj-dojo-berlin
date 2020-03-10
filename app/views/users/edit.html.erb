@@ -1,9 +1,21 @@
 <div class="container">
 
-<%= form_for(@user) do |f| %>
-  
+<%= simple_form_for(@user) do |f| %>
+
+
+<div class="update-top">
+	<div>
+	<%= link_to user_path(@user), class: "btn btn-back" do %>
+		<i class="fas fa-arrow-left"></i>
+	<% end %>
+	</div>
+	<div>
+		<%= f.button :submit, "Update Profile", class: "btn btn-primary mb-3" %>
+	</div>
+</div>
+
 	<!-- Card with name, avatar and email -->
-	<div class="row align-items-center bg-white py-3 rounded-lg shadow-sm" id="name-card">
+	<div class="row align-items-center bg-secondary py-3 rounded-lg shadow-sm" id="name-card">
     <!-- Avatar -->
     <div class="col-3 ml-1">
       <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
@@ -11,8 +23,10 @@
     
     <!-- Name -->
     <div class="col-7">
-      <h4><%= f.text_field :first_name %><%= f.text_field :last_name %></h4>
+      <p><%= f.text_field :first_name %></p>
+      <p><%= f.text_field :last_name %></p>
       <p><%= f.text_field :email %></p>
+      <%= link_to "Edit Password", edit_user_password_path(@user), class: "btn" %>
     </div>
     
 		<!-- Badge showing if admin or student -->
@@ -34,7 +48,7 @@
 	  
 	  <!-- Card personal details -->
 	  <div class="col mb-4">
-	    <div class="card border-0 b rounded-lg shadow-sm">
+	    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
 	      <div class="card-body">
 	        <h5 class="card-title"><strong>Personal Info</strong></h5>
 	        <br>
@@ -52,7 +66,7 @@
 	   
 		<!-- Club affilitation -->
 		<div class="col mb-4">
-	    <div class="card border-0 b rounded-lg shadow-sm">
+	    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
 	      <div class="card-body">
 	        <h5 class="card-title"><strong>Club affiliation</strong></h5>
 	        <br>
@@ -89,7 +103,7 @@
 
 		<!-- BJJ level -->
 		<div class="col mb-4">
-	    <div class="card border-0 b rounded-lg shadow-sm">
+	    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
 	      <div class="card-body">
 	        <h5 class="card-title"><strong>BJJ level</strong></h5>
 	        <br>
@@ -120,18 +134,18 @@
 
 	  	<!-- Measurements -->
 		<div class="col mb-4">
-	    <div class="card border-0 b rounded-lg shadow-sm">
+	    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
 	      <div class="card-body">
 	        <h5 class="card-title"><strong>Measurements</strong></h5>
 	        <br>
 	        <p class="card-text">
 	        	<%= f.label "Height:" %>
 	        	<%= f.number_field :height %>
-	        </p>
+	        cm</p>
 	        <p class="card-text">
 	        	<%= f.label "Weight:" %>
 	        	<%= f.number_field :weight %>
-	        </p>
+	        kg</p>
 	        <% if current_user.admin? %>
 	        	<p class="card-text">
 		        	<%= f.label "Weight good?" %>
@@ -151,26 +165,34 @@
  	</div>
 	
 	<!-- Comments cards -->
-	<% if current_user.admin? %>
+		<% if current_user.admin? %>
 
-	<h4 class="ml-3"><strong>Comments</strong></h4>
-		<% @user.comments.each do |comment| %>
-			<div class="row row-cols-1 row-cols-sm-1">
-				<div class="col mb-4">
-					<div class="card border-0 b rounded-lg shadow-sm">
-						<div class="card-body">
-													
-							<h5><strong><%= comment.category %>:</strong></h5>
-							<p><%= comment.content %></p>
+		<h4 class="ml-3"><strong>Comments</strong></h4>
+			<% if @user.comments.empty? %>
+				<p>
+					<%= "No comments yet" %> <%= link_to edit_user_path(@user), class: "btn" do %>
+						<i class="fas fa-plus-square"></i>
+					<% end %>
+				</p>
+			<% else %>
+				<% @user.comments.each do |comment| %>
+					<div class="row row-cols-1 row-cols-sm-1">
+						<div class="col mb-4">
+							<div class="card bg-secondary border-0 b rounded-lg shadow-sm">
+								<div class="card-body">
+															
+									<h5><strong><%= comment.category %>:</strong></h5>
+									<p><%= comment.content %></p>
 
-						</div>	
+								</div>	
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
+				<% end %>
+			<% end %>
 		<% end %>
-	<% end %>
 
-  <%= f.submit %>
+  <%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
 <% end %>
 </div>
 

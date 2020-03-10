@@ -26,7 +26,8 @@
       <p><%= f.text_field :first_name %></p>
       <p><%= f.text_field :last_name %></p>
       <p><%= f.text_field :email %></p>
-      <%= link_to "Edit Password", edit_user_password_path(@user), class: "btn" %>
+      <%#= link_to "Edit Password", user_edit_password_path(@user), class: "btn" %>
+      <%#= link_to "Cancel Registation", cancel_user_registration_path(@user), class: "btn" %>
     </div>
     
 		<!-- Badge showing if admin or student -->
@@ -65,72 +66,61 @@
 	  </div>
 	   
 		<!-- Club affilitation -->
-		<div class="col mb-4">
-	    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
-	      <div class="card-body">
-	        <h5 class="card-title"><strong>Club affiliation</strong></h5>
-	        <br>
-	        <% if current_user.admin? %>
-		        <p class="card-text">
-		        	<%= f.label "Member since:" %>
-		        	<%= f.date_field :started %>
-		        </p>
-		      <% else %>
-		        <p class="card-text">
-		        	Member since: <% if @user.started == nil %>
-								<span class="n-a"><%= "n/a" %></span>
-							<% else %>
-		        		<%= @user.started.strftime("%d.%m.%Y") %>
-		        	<% end %>
-		        </p>
-		      <% end %>
-	       
-	       	<% if current_user.admin? %>	
-		        <p class="card-text">
-		        	<%= f.label "Active:" %> 
-		        	<%= f.check_box :active_member %>
-		        </p>
-		        <p class="card-text">
-		        	<%= f.label "Why (not active):" %>
-		        	<%= f.text_field :not_active_why %>
-		        </p>
-	        <% else %>
-						<p>Active: <%= @user.active_member %></p>
-					<% end %>
-	      </div>
-	    </div>
-	  </div>
+	  <% if current_user.admin? %>
+			<div class="col mb-4">
+		    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
+		      <div class="card-body">
+		        <h5 class="card-title"><strong>Club affiliation</strong></h5>
+		        <br>
+			        <p class="card-text">
+			        	<%= f.label "Member since:" %>
+			        	<%= f.date_field :started %>
+			        </p>
+			        <p class="card-text">
+			        	<%= f.label "Active:" %> 
+			        	<%= f.check_box :active_member %>
+			        </p>
+			        <p class="card-text">
+			        	<%= f.label "Why (not active):" %>
+			        	<%= f.text_field :not_active_why %>
+			        </p>
+		      </div>
+		    </div>
+		  </div>
+		<% end %>
 
 		<!-- BJJ level -->
-		<div class="col mb-4">
-	    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
-	      <div class="card-body">
-	        <h5 class="card-title"><strong>BJJ level</strong></h5>
-	        <br>
-	        <p class="card-text">
-	        	Belt: <% if @user.belt == "" %>
-	        		<span class="n-a"><%= "n/a" %></span>
-	        	<% else %>
-	        		<%= @user.belt %>
-	        	<% end %>
-	        	</p>
-	        <p class="card-text">
-	        	Last promotion: <% if @user.last_promotion == nil %>
-	        		<span class="n-a"><%= "n/a" %></span>
-						<% else %>
-	        		<%= @user.last_promotion.strftime("%d.%m.%Y") %>
-	        	<% end %>
-	        	</p>
-	        <p class="card-text">
-	        	Promoted <% if @user.last_promotion == nil %>
-							<span class="n-a"><%= "n/a" %></span>
-						<% else %>
-	        		<strong><%= @user.date_diff(@user.last_promotion, Date.today) %></strong> ago
-						<% end %>
-	        	</p>
-	      </div>
-	    </div>
-	  </div>
+		<% if current_user.admin? %>
+			<div class="col mb-4">
+		    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
+		      <div class="card-body">
+		        <h5 class="card-title"><strong>BJJ level</strong></h5>
+		        <br>
+		        <p class="card-text">
+		        	Belt: <% if @user.belt == "" %>
+		        		<span class="n-a"><%= "n/a" %></span>
+		        	<% else %>
+		        		<%= @user.belt %>
+		        	<% end %>
+		        	</p>
+		        <p class="card-text">
+		        	Last promotion: <% if @user.last_promotion == nil %>
+		        		<span class="n-a"><%= "n/a" %></span>
+							<% else %>
+		        		<%= @user.last_promotion.strftime("%d.%m.%Y") %>
+		        	<% end %>
+		        	</p>
+		        <p class="card-text">
+		        	Promoted <% if @user.last_promotion == nil %>
+								<span class="n-a"><%= "n/a" %></span>
+							<% else %>
+		        		<strong><%= @user.date_diff(@user.last_promotion, Date.today) %></strong> ago
+							<% end %>
+		        	</p>
+		      </div>
+		    </div>
+		  </div>
+		<% end %>
 
 	  	<!-- Measurements -->
 		<div class="col mb-4">
@@ -193,6 +183,10 @@
 		<% end %>
 
   <%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
+  <%= link_to "Delete Profile", user_path(@user),
+        method: :delete,
+        data: { confirm: "Are you sure you want to delete user #{@user.first_name.upcase} #{@user.last_name.upcase}?" },
+        class: "btn btn-danger" %>
 <% end %>
 </div>
 

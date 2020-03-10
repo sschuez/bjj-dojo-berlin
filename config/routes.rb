@@ -6,10 +6,14 @@ Rails.application.routes.draw do
   get 'comments/destroy'
   get 'comments/update'
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+  
+  devise_for :users 
   
   resources :users do
   	resources :comments
+
+    # get 'passwords/edit' => 'devise/passwords#edit', :as => 'edit_password'    
+    # put 'passwords' => 'devise/passwords#update', :as => 'user_password'
   
   end 
   root to: 'pages#home'

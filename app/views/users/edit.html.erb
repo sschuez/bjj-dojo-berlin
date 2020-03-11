@@ -2,7 +2,6 @@
 
 <%= simple_form_for(@user) do |f| %>
 
-
 <div class="update-top">
 	<div>
 	<%= link_to user_path(@user), class: "btn btn-back" do %>
@@ -18,18 +17,47 @@
 	<div class="row align-items-center bg-secondary py-3 rounded-lg shadow-sm" id="name-card">
     <!-- Avatar -->
     <div class="col-3 ml-1">
-      <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
+      <%#= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
+	  	<%= cl_image_tag @user.photo.key, :transformation=>[
+	  	  {:width=>400, :height=>400, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
+	  	  {:width=>200, :crop=>"scale"}
+	  	  ], class: "avatar-large", alt: "avatar-large" %>
+	  	<br>
+	  	<br>
+
+	  	<%#= simple_form_for(@user) do |f| %>
+	  		<%#= f.button :submit, "Upload Photo", class: "btn btn-primary" %>
+	  	<%# end %>
     </div>
-    
+		
+
     <!-- Name -->
-    <div class="col-7">
+    <div class="col-7 card-name">
       <p><%= f.text_field :first_name %></p>
       <p><%= f.text_field :last_name %></p>
       <p><%= f.text_field :email %></p>
       <%#= link_to "Edit Password", user_edit_password_path(@user), class: "btn" %>
       <%#= link_to "Cancel Registation", cancel_user_registration_path(@user), class: "btn" %>
     </div>
-    
+	  <div class="photo-selection">
+	  	<!-- 
+	  	<div>
+		 		<%#= f.input :photo, as: :file, class: "btn btn-warning", label: false %>
+		 	</div> -->
+
+		<div>
+			<label class="btn btn-primary">
+			  Add a file!
+			  <span style="display:none;">
+			    <%= f.input :photo, as: :file, class: "btn btn-warning", label: false %>
+			  </span>
+			</label>
+    </div>
+		 	<div>
+				<%= f.button :submit, "Update Photo", class: "btn btn-warning" %>
+			</div>
+		</div>
+
 		<!-- Badge showing if admin or student -->
     <% if @user.admin? %>
 	    <div class="user-admin">

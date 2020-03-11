@@ -1,0 +1,13 @@
+.comments{
+	display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  position: relative;
+	.add-comment{
+  	position: absolute;
+  	left: 150px;
+  	top: -12px;
+	}
+}
+
+

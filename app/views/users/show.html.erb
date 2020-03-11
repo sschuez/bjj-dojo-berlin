@@ -29,14 +29,20 @@
 	<div class="row align-items-center bg-white py-3 rounded-lg shadow-sm" id="name-card">
     <!-- Avatar -->
     <div class="col-3 ml-1">
-      <%#= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
       <% if @user.photo.attached? %>
       	<%= cl_image_tag @user.photo.key, :transformation=>[
       	  	  {:width=>400, :height=>400, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
       	  	  {:width=>200, :crop=>"scale"}
       	  	  ], class: "avatar-large", alt: "avatar-large" %>
 			<% else %>
+				<div class="avatar-notice">
+					<%= link_to edit_user_path(@user), class: "btn" do %>
+					  <p>Please update image</p>
+					<% end %>				
+				</div>
+				<div class="default-avatar">
 				<%= image_tag "default_avatar_square.png", class: "avatar-large", alt: "avatar-large" %>
+				</div>
       <% end %>
     </div>
     

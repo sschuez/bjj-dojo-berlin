@@ -39,8 +39,18 @@
 		<%= link_to user_path(user) do %>
 	  <div class="row align-items-center mt-1 border bg-light">
 	    
-	    <div class="col-2 py-3">
-	      <%= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar", alt: "avatar" %>
+	    <div class="col-2 user-avatar">
+	      <% if user.photo.attached? %>
+	         <%= cl_image_tag user.photo.key, :transformation=>[
+	            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
+	            {:width=>200, :crop=>"scale"}
+	            ], 
+	            class: "avatar", alt: "avatar" %>
+	      <% else %>
+					<div class="default-avatar">
+						<%= image_tag "default_avatar_square.png", class: "avatar", alt: "avatar" %>
+					</div>
+	      <% end %>
 	    </div>
 	    <div class="col-4 py-3 border-right">
 	      <%= user.first_name %>

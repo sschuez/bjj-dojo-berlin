@@ -1,5 +1,12 @@
 <div class="container">
 
+<!-- Name definition for delete alert message -->
+<% if @user.first_name == nil || @user.first_name == "" %>
+	<% user_name = "Name undefined" %>
+<% else %>
+	<% user_name = @user.first_name + " " + @user.last_name %>
+<% end %>
+
 <%= simple_form_for(@user) do |f| %>
 
 <div class="update-top">
@@ -18,10 +25,14 @@
     <!-- Avatar -->
     <div class="col-3 ml-1">
       <%#= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
-	  	<%= cl_image_tag @user.photo.key, :transformation=>[
-	  	  {:width=>400, :height=>400, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
-	  	  {:width=>200, :crop=>"scale"}
-	  	  ], class: "avatar-large", alt: "avatar-large" %>
+	  	<% if @user.photo.attached? %>
+	  		<%= cl_image_tag @user.photo.key, :transformation=>[
+      	  	  {:width=>400, :height=>400, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
+      	  	  {:width=>200, :crop=>"scale"}
+      	  	  ], class: "avatar-large", alt: "avatar-large" %>
+	  	<% else %>
+	  		<%= image_tag "default_avatar_square", class: "avatar-large", alt: "avatar-large" %>
+	  	<% end %>
 	  	<br>
 	  	<br>
 
@@ -212,9 +223,9 @@
 
   <%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
   <%= link_to "Delete Profile", user_path(@user),
-        method: :delete,
-        data: { confirm: "Are you sure you want to delete user #{@user.first_name.upcase} #{@user.last_name.upcase}?" },
-        class: "btn btn-danger" %>
+	      method: :delete,
+	      data: { confirm: "Are you sure you want to delete user ##{@user.id} - #{user_name}?" },
+	      class: "btn btn-danger" %>
 <% end %>
 </div>
 

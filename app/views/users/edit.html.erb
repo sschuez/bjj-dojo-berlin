@@ -1,233 +1,246 @@
 <div class="container">
 
-<!-- Name definition for delete alert message -->
-<% if @user.first_name == nil || @user.first_name == "" %>
-	<% user_name = "Name undefined" %>
-<% else %>
-	<% user_name = @user.first_name + " " + @user.last_name %>
-<% end %>
+<% if current_user == @user || current_user.admin? %>
 
-<%= simple_form_for(@user) do |f| %>
-
-<div class="update-top">
-	<div>
-	<%= link_to user_path(@user), class: "btn btn-back" do %>
-		<i class="fas fa-arrow-left"></i>
+	<!-- Name definition for delete alert message -->
+	<% if @user.first_name == nil || @user.first_name == "" %>
+		<% user_name = "Name undefined" %>
+	<% else %>
+		<% user_name = @user.first_name + " " + @user.last_name %>
 	<% end %>
-	</div>
-	<div>
-		<%= f.button :submit, "Update Profile", class: "btn btn-primary mb-3" %>
-	</div>
-</div>
 
-	<!-- Card with name, avatar and email -->
-	<div class="row align-items-center bg-secondary py-3 rounded-lg shadow-sm" id="name-card">
-    <!-- Avatar -->
-    <div class="col-3 ml-1">
-      <%#= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
-	  	<% if @user.photo.attached? %>
-	  		<%= cl_image_tag @user.photo.key, :transformation=>[
-      	  	  {:width=>400, :height=>400, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
-      	  	  {:width=>200, :crop=>"scale"}
-      	  	  ], class: "avatar-large", alt: "avatar-large" %>
-	  	<% else %>
-	  		<%= image_tag "default_avatar_square.png", class: "avatar-large", alt: "avatar-large" %>
-	  	<% end %>
-	  	<br>
-	  	<br>
+	<%= simple_form_for(@user) do |f| %>
 
-	  	<%#= simple_form_for(@user) do |f| %>
-	  		<%#= f.button :submit, "Upload Photo", class: "btn btn-primary" %>
-	  	<%# end %>
-    </div>
-		
-
-    <!-- Name -->
-    <div class="col-7 card-name">
-      <p><%= f.text_field :first_name, placeholder: "First name" %></p>
-      <p><%= f.text_field :last_name, placeholder: "Last name" %></p>
-      <p><%= f.text_field :email %></p>
-      <%#= link_to "Edit Password", user_edit_password_path(@user), class: "btn" %>
-      <%#= link_to "Cancel Registation", cancel_user_registration_path(@user), class: "btn" %>
-    </div>
-	  <div class="photo-selection">
-	  	<!-- 
-	  	<div>
-		 		<%#= f.input :photo, as: :file, class: "btn btn-warning", label: false %>
-		 	</div> -->
-
+	<div class="update-top">
 		<div>
-			<label class="btn btn-primary">
-			  Add a file!
-			  <span style="display:none;">
-			    <%= f.input :photo, as: :file, class: "btn btn-warning", label: false %>
-			  </span>
-			</label>
-    </div>
-    <br>
-		 	<div>
-				<%= f.button :submit, "Update Photo", class: "btn btn-warning" %>
-			</div>
+		<%= link_to user_path(@user), class: "btn btn-back" do %>
+			<i class="fas fa-arrow-left"></i>
+		<% end %>
 		</div>
+		<div>
+			<%= f.button :submit, "Update Profile", class: "btn btn-primary mb-3" %>
+		</div>
+	</div>
 
-		<!-- Badge showing if admin or student -->
-    <% if @user.admin? %>
-	    <div class="user-admin">
-	      <h2 class="badge-admin"><strong>Admin</strong></h2>
-	    </div>	  
-     <% else %>
-			<div class="student-admin">
-	      <h2 class="badge-admin"><strong>Student</strong></h2>
-	    </div>
-     <% end %>
-  </div>
+		<!-- Card with name, avatar and email -->
+		<div class="row align-items-center bg-secondary py-3 rounded-lg shadow-sm" id="name-card">
+	    <!-- Avatar -->
+	    <div class="col-3 ml-1">
+	      <%#= image_tag "https://kitt.lewagon.com/placeholder/users/cveneziani", class: "avatar-large", alt: "avatar-large" %>
+		  	<% if @user.photo.attached? %>
+		  		<%= cl_image_tag @user.photo.key, :transformation=>[
+	      	  	  {:width=>400, :height=>400, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
+	      	  	  {:width=>200, :crop=>"scale"}
+	      	  	  ], class: "avatar-large", alt: "avatar-large" %>
+		  	<% else %>
+		  		<%= image_tag "default_avatar_square.png", class: "avatar-large", alt: "avatar-large" %>
+		  	<% end %>
+		  	<br>
+		  	<br>
 
-	<br>
-	
-	<!-- Profile cards -->
-	<div class="row row-cols-1 row-cols-md-2">
-	  
-	  <!-- Card personal details -->
-	  <div class="col mb-4">
-	    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
-	      <div class="card-body">
-	        <h5 class="card-title"><strong>Personal Info</strong></h5>
-	        <br>
-	        <p class="card-text">
-	        	<%= f.label "Birthday:" %>
-	        	<%= f.date_field :date_of_birth %>
-	        </p>
-	        <p class="card-text">
-	        	<%= f.label "Phone:" %>
-	        	<%= f.text_field :phone %>
-	        	</p>
-	      </div>
+		  	<%#= simple_form_for(@user) do |f| %>
+		  		<%#= f.button :submit, "Upload Photo", class: "btn btn-primary" %>
+		  	<%# end %>
 	    </div>
+			
+
+	    <!-- Name -->
+	    <div class="col-7 card-name">
+	      <p><%= f.text_field :first_name, placeholder: "First name" %></p>
+	      <p><%= f.text_field :last_name, placeholder: "Last name" %></p>
+	      <p><%= f.text_field :email %></p>
+	      <%#= link_to "Edit Password", user_edit_password_path(@user), class: "btn" %>
+	      <%#= link_to "Cancel Registation", cancel_user_registration_path(@user), class: "btn" %>
+	    </div>
+		  <div class="photo-selection">
+		  	<!-- 
+		  	<div>
+			 		<%#= f.input :photo, as: :file, class: "btn btn-warning", label: false %>
+			 	</div> -->
+
+			<div>
+				<label class="btn btn-primary">
+				  Add a file!
+				  <span style="display:none;">
+				    <%= f.input :photo, as: :file, class: "btn btn-warning", label: false %>
+				  </span>
+				</label>
+	    </div>
+	    <br>
+			 	<div>
+					<%= f.button :submit, "Update Photo", class: "btn btn-warning" %>
+				</div>
+			</div>
+
+			<!-- Badge showing if admin or student -->
+	    <% if @user.admin? %>
+		    <div class="user-admin">
+		      <h2 class="badge-admin"><strong>Admin</strong></h2>
+		    </div>	  
+	     <% else %>
+				<div class="student-admin">
+		      <h2 class="badge-admin"><strong>Student</strong></h2>
+		    </div>
+	     <% end %>
 	  </div>
-	   
-		<!-- Club affilitation -->
-	  <% if current_user.admin? %>
-			<div class="col mb-4">
-		    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
-		      <div class="card-body">
-		        <h5 class="card-title"><strong>Club affiliation</strong></h5>
-		        <br>
-			        <p class="card-text">
-			        	<%= f.label "Member since:" %>
-			        	<%= f.date_field :started %>
-			        </p>
-			        <p class="card-text">
-			        	<%= f.label "Active:" %> 
-			        	<%= f.check_box :active_member %>
-			        </p>
-			        <p class="card-text">
-			        	<%= f.label "Why (not active):" %>
-			        	<%= f.text_field :not_active_why %>
-			        </p>
-		      </div>
-		    </div>
-		  </div>
-		<% end %>
 
-		<!-- BJJ level -->
-		<% if current_user.admin? %>
-			<div class="col mb-4">
-		    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
-		      <div class="card-body">
-		        <h5 class="card-title"><strong>BJJ level</strong></h5>
-		        <br>
-		        <p class="card-text">
-		        	Belt: <% if @user.belt == "" %>
-		        		<span class="n-a"><%= "n/a" %></span>
-		        	<% else %>
-		        		<%= @user.belt %>
-		        	<% end %>
-		        	</p>
-		        <p class="card-text">
-		        	Last promotion: <% if @user.last_promotion == nil %>
-		        		<span class="n-a"><%= "n/a" %></span>
-							<% else %>
-		        		<%= @user.last_promotion.strftime("%d.%m.%Y") %>
-		        	<% end %>
-		        	</p>
-		        <p class="card-text">
-		        	Promoted <% if @user.last_promotion == nil %>
-								<span class="n-a"><%= "n/a" %></span>
-							<% else %>
-		        		<strong><%= @user.date_diff(@user.last_promotion, Date.today) %></strong> ago
-							<% end %>
-		        	</p>
-		      </div>
-		    </div>
-		  </div>
-		<% end %>
-
-	  	<!-- Measurements -->
-		<div class="col mb-4">
-	    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
-	      <div class="card-body">
-	        <h5 class="card-title"><strong>Measurements</strong></h5>
-	        <br>
-	        <p class="card-text">
-	        	<%= f.label "Height:" %>
-	        	<%= f.number_field :height %>
-	        cm</p>
-	        <p class="card-text">
-	        	<%= f.label "Weight:" %>
-	        	<%= f.number_field :weight %>
-	        kg</p>
-	        <% if current_user.admin? %>
-	        	<p class="card-text">
-		        	<%= f.label "Weight good?" %>
-		        	<%= f.check_box :weight_good %>
-	        	</p>
-	        	<p class="card-text">
-	        		<%= f.label "Reasons for weight:" %>
-	        		<%= f.text_field :reasons_for_weight %>
-	        	</p>
-	        <% end %>
-
-	      </div>
-	    </div>
- 		</div>
 		<br>
- 
- 	</div>
-	
-	<!-- Comments cards -->
-		<% if current_user.admin? %>
+		
+		<!-- Profile cards -->
+		<div class="row row-cols-1 row-cols-md-2">
+		  
+		  <!-- Card personal details -->
+		  <div class="col mb-4">
+		    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
+		      <div class="card-body">
+		        <h5 class="card-title"><strong>Personal Info</strong></h5>
+		        <br>
+		        <p class="card-text">
+		        	<%= f.label "Birthday:" %>
+		        	<%= f.date_field :date_of_birth %>
+		        </p>
+		        <p class="card-text">
+		        	<%= f.label "Phone:" %>
+		        	<%= f.text_field :phone %>
+		        	</p>
+		      </div>
+		    </div>
+		  </div>
+		   
+			<!-- Club affilitation -->
+		  <% if current_user.admin? %>
+				<div class="col mb-4">
+			    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
+			      <div class="card-body">
+			        <h5 class="card-title"><strong>Club affiliation</strong></h5>
+			        <br>
+				        <p class="card-text">
+				        	<%= f.label "Member since:" %>
+				        	<%= f.date_field :started %>
+				        </p>
+				        <p class="card-text">
+				        	<%= f.label "Active:" %> 
+				        	<%= f.check_box :active_member %>
+				        </p>
+				        <p class="card-text">
+				        	<%= f.label "Why (not active):" %>
+				        	<%= f.text_field :not_active_why %>
+				        </p>
+			      </div>
+			    </div>
+			  </div>
+			<% end %>
 
-		<h4 class="ml-3"><strong>Comments</strong></h4>
-			<% if @user.comments.empty? %>
-				<p>
-					<%= "No comments yet" %> <%= link_to edit_user_path(@user), class: "btn" do %>
-						<i class="fas fa-plus-square"></i>
-					<% end %>
-				</p>
-			<% else %>
-				<% @user.comments.each do |comment| %>
-					<div class="row row-cols-1 row-cols-sm-1">
-						<div class="col mb-4">
-							<div class="card bg-secondary border-0 b rounded-lg shadow-sm">
-								<div class="card-body">
-															
-									<h5><strong><%= comment.category %>:</strong></h5>
-									<p><%= comment.content %></p>
+			<!-- BJJ level -->
+			<% if current_user.admin? %>
+				<div class="col mb-4">
+			    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
+			      <div class="card-body">
+			        <h5 class="card-title"><strong>BJJ level</strong></h5>
+			        <br>
+			        <p class="card-text">
+			        	Belt: <% if @user.belt == "" %>
+			        		<span class="n-a"><%= "n/a" %></span>
+			        	<% else %>
+			        		<%= @user.belt %>
+			        	<% end %>
+			        	</p>
+			        <p class="card-text">
+			        	Last promotion: <% if @user.last_promotion == nil %>
+			        		<span class="n-a"><%= "n/a" %></span>
+								<% else %>
+			        		<%= @user.last_promotion.strftime("%d.%m.%Y") %>
+			        	<% end %>
+			        	</p>
+			        <p class="card-text">
+			        	Promoted <% if @user.last_promotion == nil %>
+									<span class="n-a"><%= "n/a" %></span>
+								<% else %>
+			        		<strong><%= @user.date_diff(@user.last_promotion, Date.today) %></strong> ago
+								<% end %>
+			        	</p>
+			      </div>
+			    </div>
+			  </div>
+			<% end %>
 
-								</div>	
+		  	<!-- Measurements -->
+			<div class="col mb-4">
+		    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
+		      <div class="card-body">
+		        <h5 class="card-title"><strong>Measurements</strong></h5>
+		        <br>
+		        <p class="card-text">
+		        	<%= f.label "Height:" %>
+		        	<%= f.number_field :height %>
+		        cm</p>
+		        <p class="card-text">
+		        	<%= f.label "Weight:" %>
+		        	<%= f.number_field :weight %>
+		        kg</p>
+		        <% if current_user.admin? %>
+		        	<p class="card-text">
+			        	<%= f.label "Weight good?" %>
+			        	<%= f.check_box :weight_good %>
+		        	</p>
+		        	<p class="card-text">
+		        		<%= f.label "Reasons for weight:" %>
+		        		<%= f.text_field :reasons_for_weight %>
+		        	</p>
+		        <% end %>
+
+		      </div>
+		    </div>
+	 		</div>
+			<br>
+	 
+	 	</div>
+		
+		<!-- Comments cards -->
+			<% if current_user.admin? %>
+
+			<h4 class="ml-3"><strong>Comments</strong></h4>
+				<% if @user.comments.empty? %>
+					<p>
+						<%= "No comments yet" %> <%= link_to edit_user_path(@user), class: "btn" do %>
+							<i class="fas fa-plus-square"></i>
+						<% end %>
+					</p>
+				<% else %>
+					<% @user.comments.each do |comment| %>
+						<div class="row row-cols-1 row-cols-sm-1">
+							<div class="col mb-4">
+								<div class="card bg-secondary border-0 b rounded-lg shadow-sm">
+									<div class="card-body">
+																
+										<h5><strong><%= comment.category %>:</strong></h5>
+										<p><%= comment.content %></p>
+
+									</div>	
+								</div>
 							</div>
 						</div>
-					</div>
+					<% end %>
 				<% end %>
 			<% end %>
-		<% end %>
 
-  <%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
-  <%= link_to "Delete Profile", user_path(@user),
-	      method: :delete,
-	      data: { confirm: "Are you sure you want to delete user ##{@user.id} - #{user_name}?" },
-	      class: "btn btn-danger" %>
+	  <%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
+	  <%= link_to "Delete Profile", user_path(@user),
+		      method: :delete,
+		      data: { confirm: "Are you sure you want to delete user ##{@user.id} - #{user_name}?" },
+		      class: "btn btn-danger" %>	
+	<% end %>
+
+<!-- Admin or @user logic -->
+<% else %>
+	<h2>No Access</h2>
+	<p>This is someone else's profile.</p>
+
+	<%= link_to "Your Profile", user_path(current_user), class: "btn btn-primary" %>
+	<%= link_to "Home Page", root_path, class: "btn btn-primary" %>
 <% end %>
+<!-- Admin or @user logic -->
+
 </div>
 
 

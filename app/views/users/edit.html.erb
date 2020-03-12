@@ -108,7 +108,6 @@
 		  </div>
 		   
 			<!-- Club affilitation -->
-		  <% if current_user.admin? %>
 				<div class="col mb-4">
 			    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
 			      <div class="card-body">
@@ -118,18 +117,19 @@
 				        	<%= f.label "Member since:" %>
 				        	<%= f.date_field :started %>
 				        </p>
-				        <p class="card-text">
-				        	<%= f.label "Active:" %> 
-				        	<%= f.check_box :active_member %>
-				        </p>
-				        <p class="card-text">
-				        	<%= f.label "Why (not active):" %>
-				        	<%= f.text_field :not_active_why %>
-				        </p>
+		  					<% if current_user.admin? %>
+					        <p class="card-text">
+					        	<%= f.label "Active:" %> 
+					        	<%= f.check_box :active_member %>
+					        </p>
+					        <p class="card-text">
+					        	<%= f.label "Why (not active):" %>
+					        	<%= f.text_field :not_active_why %>
+					        </p>
+							<% end %>
 			      </div>
 			    </div>
 			  </div>
-			<% end %>
 
 			<!-- BJJ level -->
 			<% if current_user.admin? %>

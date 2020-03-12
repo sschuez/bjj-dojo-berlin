@@ -19,7 +19,8 @@ gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
 gem 'cloudinary', '~> 1.12.0'
-gem 'cancancan'
+gem 'pundit'
+gem 'pretender'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

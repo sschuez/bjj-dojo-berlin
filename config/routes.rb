@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   resources :users do
   	resources :comments
 
+    # Pretender Gem
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
+
     # get 'passwords/edit' => 'devise/passwords#edit', :as => 'edit_password'    
     # put 'passwords' => 'devise/passwords#update', :as => 'user_password'
   

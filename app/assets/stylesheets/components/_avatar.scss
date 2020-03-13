@@ -25,7 +25,7 @@
 .avatar-notice {
   position: absolute;
   z-index: +1;
-  right: -20px;
+  right: -0px;
   top: -10px;
 
   p{
@@ -41,3 +41,40 @@
   padding: 10px;
   // padding-left: 6px;
 }
+
+.btn-avatar{
+  border: solid 1px;
+  padding: 3px;
+  font-size: 10px;
+}
+
+.btn-avatar:hover{
+    background-color: $blue;
+    color: white;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

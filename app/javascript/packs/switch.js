@@ -8,3 +8,5 @@ mySwitch.addEventListener("click", (event) => {
 });
 
 console.log(mySwitch);
+
+

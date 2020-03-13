@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+	
 	def index
 		if params[:query].present?
 		  sql_query = "first_name ILIKE :query OR last_name ILIKE :query"

@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   devise_for :users 
   
   resources :users do
-  	resources :comments
+  
+    resources :comments
 
     resources :promotions, only: [:new, :create]
 
@@ -18,8 +19,6 @@ Rails.application.routes.draw do
     post :impersonate, on: :member
     post :stop_impersonating, on: :collection
 
-    # get 'passwords/edit' => 'devise/passwords#edit', :as => 'edit_password'    
-    # put 'passwords' => 'devise/passwords#update', :as => 'user_password'
   
   end 
   root to: 'pages#home'

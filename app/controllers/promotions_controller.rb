@@ -26,7 +26,6 @@ class PromotionsController < ApplicationController
 		redirect_to user_path(@user)
 
 		@belts.index(@user.promotions.last.belt)
-
 	end
 
 	private

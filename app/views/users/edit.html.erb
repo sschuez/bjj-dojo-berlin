@@ -2,13 +2,6 @@
 
 <% if current_user == @user || current_user.admin? %>
 
-	<!-- Name definition for delete alert message -->
-	<% if @user.first_name == nil || @user.first_name == "" %>
-		<% user_name = "Name undefined" %>
-	<% else %>
-		<% user_name = @user.first_name + " " + @user.last_name %>
-	<% end %>
-
 	<%= simple_form_for(@user) do |f| %>
 
 	<div class="update-top">
@@ -49,22 +42,6 @@
 
 		  <div class="photo-selection">
 				
-				<!-- <div>
-					<label class="btn btn-primary">
-					  Add a file!
-					  <span style="display:none;">
-					    <%#= f.input :photo, as: :file, class: "btn btn-warning", label: false %>
-					  </span>
-					</label>
-		    </div> -->
-
-				<!-- <label class="btn btn-primary"> -->
-				  <!-- Add a file! -->
-				  <!-- <span style="display:none;"> -->
-				    <%#= f.input :photo, required: true, multiple: true, name: 'picture' %>
-				  <!-- </span> -->
-				<!-- </label> -->
-
 		    <div class="btn btn-primary upload-button">
 		    	<%= f.input :photo, as: :file, input_html: { hidden: false }, label: false %>
 		    </div>

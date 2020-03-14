@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
-	
+ 	
 	def index
 		if params[:query].present?
 		  sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     # no need for app/views/users/destroy.html.erb
-    redirect_to users_path
+    redirect_to root_path, notice: "Profile of #{user_name} successfully deleted"
 	end
 
 	# def impersonate
@@ -41,6 +41,8 @@ class UsersController < ApplicationController
  #    stop_impersonating_user
  #    redirect_to root_path
  #  end
+
+  
 
 	private
 

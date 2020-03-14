@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   before_action :set_variable
   before_action :configure_permitted_parameters, if: :devise_controller?
   
-  helper_method :user_name, :current_belt_index, :date_difference_promotion, :last_promotion
+  helper_method :user_name, :current_belt_index, :date_difference_promotion, :last_promotion, :black_belt_progress
 
   include Pundit
   # impersonates :user
@@ -41,6 +41,10 @@ class ApplicationController < ActionController::Base
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
+  end
+
+  def black_belt_progress
+    (((@belts.index(@user.promotions.last.belt) + 1.0) / @belts.length) * 100).floor
   end
 
   def set_variable

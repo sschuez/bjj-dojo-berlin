@@ -29,7 +29,7 @@
 		        	</div>
 	        <% end %>
 		    		
-			    	<% if date_difference_promotion.to_i > 6 %>
+			    	<% if date_difference_promotion > 6 %>
 			    		<!-- Show last promotion in red if older than 6 months -->
 			        <div class="promotions promotions-last red">
 			        	<div class="promotion-belt"><%= @user.promotions.last.belt %> -
@@ -38,6 +38,7 @@
 			        		<%= last_promotion.strftime("%d.%m.%Y") %>
 			        	</div>
 			        </div>
+			      </div>
 		        <% else %>
 			    		<!-- Show last promotion in green if younger than 6 months -->
   							<div class="promotions promotions-last green">
@@ -51,7 +52,7 @@
 						<% end %>
 
 	        <p class="card-text">Last promotion
-						<% if date_difference_promotion.to_i > 6 %>
+						<% if date_difference_promotion > 6 %>
         			<strong class="red"><%= @user.date_diff(last_promotion, Date.today) %></strong>
         		<% else %>
         			<strong class="green"><%= @user.date_diff(last_promotion, Date.today) %></strong>
@@ -60,12 +61,13 @@
 		      </p>
 	      </p>
         <p>
-        	You are <strong><%= (((@belts.index(@user.promotions.last.belt) + 1.0) / @belts.length) * 100).floor %>%</strong> into the <strong>black belt</strong>
+        	You are <strong><%= black_belt_progress %>%</strong> into the <strong>black belt</strong>
         </p>
-        <% if current_user.admin? %>
-        	<%= link_to "Promote", new_user_promotion_path(@user), class: "btn btn-primary" %>
-        <% end %>
-    
+        <% if black_belt_progress != 100 %>
+	        <% if current_user.admin? %>
+	        	<%= link_to "Promote", new_user_promotion_path(@user), class: "btn btn-primary" %>
+	        <% end %>
+    		<% end %>
     	<% end %>
     
     </div>

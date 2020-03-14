@@ -46,7 +46,7 @@
 				        	<% end %>
 				        <% end %>
 				    		
-					    	<% if date_difference_promotion.to_i > 6 %>
+					    	<% if date_difference_promotion > 6 %>
 					    		<!-- Show last promotion in red if older than 6 months -->
 					        <div class="promotions promotions-last red">
 					        	<div class="promotion-belt"><%= @user.promotions.last.belt.upcase %> -
@@ -72,7 +72,7 @@
 			        	<% if @user.promotions.empty? %>
 									<span class="n-a"><%= "n/a" %></span>
 								<% else %>
-									<% if date_difference_promotion.to_i > 6 %>
+									<% if date_difference_promotion > 6 %>
 			        			<strong class="red"><%= @user.date_diff(last_promotion, Date.today) %></strong>
 			        		<% else %>
 			        			<strong class="green"><%= @user.date_diff(last_promotion, Date.today) %></strong>

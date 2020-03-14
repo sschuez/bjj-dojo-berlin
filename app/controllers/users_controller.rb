@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 	def index
 		if params[:query].present?
 		  sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
-		  @users = User.where(sql_query, query: "%#{params[:query]}%")
+		  @users = policy_scope(User.where(sql_query, query: "%#{params[:query]}%"))
 		else
 		  @users = policy_scope(User).order(created_at: :desc)
 		end

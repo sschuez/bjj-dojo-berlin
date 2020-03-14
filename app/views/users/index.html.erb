@@ -1,7 +1,7 @@
 <div class="container">
 	<!-- Admin or @user logic -->
 	<% if current_user.admin? %>
-		
+
 		<!-- Search bar -->
 		<%= simple_form_for :search, url: users_path, method: :get do |f| %>
 		  <div class="search-form-control form-group">

@@ -1,7 +1,9 @@
 <!-- BJJ level -->
 <div class="col mb-4">
   <div class="card border-0 b rounded-lg shadow-sm">
-    <div class="card-body">
+    <div class="card-body add-comment-reference">
+		
+			<%= render 'users/shared_show/add_comment_button' %>
 
       <h5 class="card-title"><strong>BJJ level</strong></h5>
       <br>
@@ -60,16 +62,19 @@
         		ago
 		      </p>
 	      </p>
-        <p>
+        <p class="belt-progress">
         	You are <strong><%= black_belt_progress %>%</strong> into the <strong>black belt</strong>
         </p>
         <% if black_belt_progress != 100 %>
 	        <% if current_user.admin? %>
-	        	<%= link_to "Promote", new_user_promotion_path(@user), class: "btn btn-primary" %>
+	        	<%= link_to "Promote", new_user_promotion_path(@user), class: "btn btn-primary btn-promote" %>
 	        <% end %>
     		<% end %>
     	<% end %>
     
     </div>
+  
+  <%= render 'users/shared_show/comment_conditional_promotion' %>
+
   </div>
 </div>

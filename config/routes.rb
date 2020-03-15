@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
-  # get 'comments/index'
-  # get 'comments/new'
-  # get 'comments/create'
-  # get 'comments/show'
-  # get 'comments/destroy'
-  # get 'comments/update'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
   devise_for :users 

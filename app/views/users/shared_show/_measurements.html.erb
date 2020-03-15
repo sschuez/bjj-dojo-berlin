@@ -1,7 +1,9 @@
 <!-- Measurements -->
 <div class="col mb-4">
   <div class="card border-0 b rounded-lg shadow-sm">
-    <div class="card-body">
+    <div class="card-body add-comment-reference">
+
+      <%= render 'users/shared_show/add_comment_button' %>
 
       <h5 class="card-title"><strong>Measurements</strong></h5>
       <br>
@@ -29,10 +31,14 @@
         	<% else %>
         		<i class="fas fa-times-circle"></i>
         	<% end %>
-        	</p>
-        <p class="card-text">Reasons: <%= @user.reasons_for_weight %></p>
+        </p>
       <% end %>
-    
+      
+
     </div>
+
+
+    <%= render 'users/shared_show/comment_conditional_weight' %>
+  
   </div>
 </div>

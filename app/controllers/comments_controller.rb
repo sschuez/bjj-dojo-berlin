@@ -13,25 +13,57 @@ class CommentsController < ApplicationController
     # end
   end
 
+  def show
+  end
+
   def new
+    @user = User.find(params[:user_id])
+    @comment = Comment.new
+    authorize @comment
   end
 
   def create
     @comment = Comment.new(comment_params)
+    authorize @comment
     # we need `user_id` to associate comment with corresponding user
     @user = User.find(params[:user_id])
     @comment.user = @user
     @comment.save
+
     redirect_to user_path(@user)
+    flash[:notice] = "Created new comment in category #{@comment.category.upcase}."
   end
 
-  def show
-  end
-
-  def destroy
+  def edit
+    @user = User.find(params[:user_id])
+    @comment = Comment.find(params[:id])
+    if current_user == nil
+      redirect_to new_user_session_path
+      flash[:notice] = "Log in to edit this comment"
+    end
+    authorize @comment
   end
 
   def update
+    @user = User.find(params[:user_id])
+    @comment = Comment.find(params[:id])
+    if @comment.update(comment_params)
+      redirect_to user_path(@user)
+      flash[:notice] = "Edited comment in category #{@comment.category.upcase}."
+    else
+      render :edit
+    end
+    authorize @comment
+  end
+
+  def destroy
+    @user = User.find(params[:user_id])
+    @comment = Comment.find(params[:id])
+    @comment.destroy
+
+    redirect_to user_path(@user)
+    flash[:notice] = "Deleted comment in category #{@comment.category.upcase}."
+    authorize @comment
   end
 
   private

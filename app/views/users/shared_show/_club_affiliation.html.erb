@@ -1,7 +1,9 @@
 <!-- Club affilitation -->
 <div class="col mb-4">
   <div class="card border-0 b rounded-lg shadow-sm">
-    <div class="card-body">
+    <div class="card-body add-comment-reference">
+
+        <%= render 'users/shared_show/add_comment_button' %>
 
         <h5 class="card-title"><strong>Club affiliation</strong></h5>
         <br>
@@ -29,9 +31,11 @@
             <i class="fas fa-times-circle"></i>
             <% end %>
         </p>
-        <p class="card-text">Why (not active): <%= @user.not_active_why %></p>
         <% end %>
 
     </div>
+
+    <%= render 'users/shared_show/comment_conditional_membership' %>
+
   </div>
 </div>

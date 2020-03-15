@@ -102,6 +102,32 @@
 
 .comment-card{
 	position: relative;
+	margin-bottom: -6px;
+	h5{
+		font-size: 14px;
+	}
+	p{
+		font-size: 12px;
+		margin-bottom: 0px;
+	}
+	.card-body{
+		padding: 12px;
+		padding-bottom: 6px;
+	}
+	.fas{
+		font-size: 13px;
+	}
+	.comment-actions{
+		top: 2px;
+	}
+}
+
+.comments-standalone{
+	margin-right: 6px;
+}
+
+#updated-standalone{
+	font-size: 10px;
 }
 
 .comment-actions{
@@ -124,6 +150,43 @@
 	margin-bottom: 8px;
 }
 
+.comment-card-card{
+	margin-top: -18px;
+}
+
+.comment-card-content{
+	border-top: solid 1px;
+	border-color: rgb(198, 196, 196);
+	margin-bottom: -12px;
+	padding: 10px;
+	h5{
+		font-size: 14px;
+	}
+	p{
+		font-size: 12px;
+	}
+	.card-text{
+		margin-bottom: 6px;
+	}
+	.comment-actions{
+		margin-top: -12px;
+
+	}
+	.fas{
+		font-size: 13px;
+	}
+}
+
+.updated-at{
+	text-align: right;
+	padding-right: 6px;
+	padding-bottom: 6px;
+	p{
+		font-size: 8px;
+		margin-bottom: 0;
+		color: rgb(119, 116, 116);
+	}
+}
 
 
 

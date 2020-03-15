@@ -66,5 +66,24 @@
   color: white;
 }
 
+.add-comment-reference{
+	position: relative;
+}
+
+.add-comment-card{
+	position: absolute;
+	right: 6px;
+	bottom: 11px;
+	display: flex;
+	.fa-plus-square{
+		font-size: 18px;
+	}
+}
+
+.btn-promote{
+	margin-top: 12px;
+}
+
+
 
 

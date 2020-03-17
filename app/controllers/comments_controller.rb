@@ -62,7 +62,11 @@ class CommentsController < ApplicationController
     @comment.destroy
 
     redirect_to user_path(@user)
-    flash[:notice] = "Deleted comment in category #{@comment.category.upcase}."
+    if @comment.category == ""
+      flash[:notice] = "Deleted comment"
+    else
+      flash[:notice] = "Deleted comment in category #{@comment.category.upcase}."
+    end
     authorize @comment
   end
 

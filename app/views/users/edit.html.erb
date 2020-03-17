@@ -35,19 +35,18 @@
 
 	    <!-- Name -->
 	    <div class="col-7 card-name">
-	      <p><%= f.text_field :first_name, placeholder: "First name" %></p>
-	      <p><%= f.text_field :last_name, placeholder: "Last name" %></p>
-	      <p><%= f.text_field :email %></p>
+	    	<div class="form-group">
+		      <p><%= f.text_field :first_name, placeholder: "First name", class: "form-control" %></p>
+		      <p><%= f.text_field :last_name, placeholder: "Last name", class: "form-control" %></p>
+		      <p><%= f.text_field :email, class: "form-control" %></p>
+	    	</div>
 	    </div>
 
 		  <div class="photo-selection">
-				
 		    <div class="btn btn-primary upload-button">
-		    	<%= f.input :photo, as: :file, input_html: { hidden: false }, label: false %>
+		    	<%= f.input :photo, as: :file, label: false %>
 		    </div>
 		    
-		    <br>
-
 			 	<div>
 					<%= f.button :submit, "Update Photo", class: "btn btn-warning" %>
 				</div>
@@ -68,14 +67,16 @@
 		      <div class="card-body">
 		        <h5 class="card-title"><strong>Personal Info</strong></h5>
 		        <br>
-		        <p class="card-text">
-		        	<%= f.label "Birthday:" %>
-		        	<%= f.date_field :date_of_birth %>
-		        </p>
-		        <p class="card-text">
-		        	<%= f.label "Phone:" %>
-		        	<%= f.text_field :phone %>
-		        	</p>
+		        <div class="form-group">
+			        <p class="card-text">
+			        	<%= f.label "Birthday:" %>
+			        	<%= f.date_field :date_of_birth, class: "form-control" %>
+			        </p>
+			        <p class="card-text">
+			        	<%= f.label "Phone:" %>
+			        	<%= f.text_field :phone, class: "form-control" %>
+			        </p>
+		        </div>
 		      </div>
 		    </div>
 		  </div>
@@ -86,19 +87,17 @@
 			      <div class="card-body">
 			        <h5 class="card-title"><strong>Club affiliation</strong></h5>
 			        <br>
+			        <div class="from-group">
 				        <p class="card-text">
 				        	<%= f.label "Member since:" %>
-				        	<%= f.date_field :started %>
+				        	<%= f.date_field :started, class: "form-control" %>
 				        </p>
 		  					<% if current_user.admin? %>
 					        <p class="card-text">
 					        	<%= f.label "Active:" %> 
-					        	<%= f.check_box :active_member %>
+					        	<%= f.check_box :active_member, class: "form-control" %>
 					        </p>
-					        <p class="card-text">
-					        	<%= f.label "Why (not active):" %>
-					        	<%= f.text_field :not_active_why %>
-					        </p>
+					      </div>
 							<% end %>
 			      </div>
 			    </div>
@@ -117,27 +116,25 @@
 			  </div>
 			<% end %>
 
-		  	<!-- Measurements -->
+		  <!-- Measurements -->
 			<div class="col mb-4">
 		    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
 		      <div class="card-body">
 		        <h5 class="card-title"><strong>Measurements</strong></h5>
 		        <br>
+		        <div class="form-group">
 		        <p class="card-text">
-		        	<%= f.label "Height:" %>
-		        	<%= f.number_field :height %> cm</p>
+		        	<%= f.label "Height in cm:" %>
+		        	<%= f.number_field :height, class: "form-control" %></p>
 		        <p class="card-text">
-		        	<%= f.label "Weight:" %>
-		        	<%= f.number_field :weight %> kg</p>
+		        	<%= f.label "Weight in kg:" %>
+		        	<%= f.number_field :weight, class: "form-control" %></p>
 		        <% if current_user.admin? %>
 		        	<p class="card-text">
 			        	<%= f.label "Weight good?" %>
-			        	<%= f.check_box :weight_good %>
+			        	<%= f.check_box :weight_good, class: "form-control" %>
 		        	</p>
-		        	<p class="card-text">
-		        		<%= f.label "Reasons for weight:" %>
-		        		<%= f.text_field :reasons_for_weight %>
-		        	</p>
+		        </div>
 		        <% end %>
 
 		      </div>

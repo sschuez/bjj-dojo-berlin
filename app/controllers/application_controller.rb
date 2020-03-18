@@ -72,7 +72,7 @@ class ApplicationController < ActionController::Base
 
   # Difference between promotions
   def date_difference_promotion
-    if @user.promotions.empty? 
+    if @user.promotions.empty?
       return 0 
     else 
       (Date.today.year * 12 + Date.today.month) - (last_promotion.year * 12 + last_promotion.month).to_i

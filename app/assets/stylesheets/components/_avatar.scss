@@ -37,9 +37,11 @@
 }
 
 .user-avatar{
-  margin: 0px;
-  padding: 10px;
-  // padding-left: 6px;
+  width: 70px;
+  border-radius: 50%;
+  img:hover{
+    color: $blue; 
+  }
 }
 
 

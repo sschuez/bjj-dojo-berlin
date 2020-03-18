@@ -1,7 +1,7 @@
-<div class="container">
-	<!-- Admin or @user logic -->
-	<% if current_user.admin? %>
+<!-- Admin or @user logic -->
+<% if current_user.admin? %>
 
+	<div class="container">
 		<!-- Search bar -->
 		<%= simple_form_for :search, url: users_path, method: :get do |f| %>
 		  <div class="search-form-control form-group">
@@ -16,76 +16,82 @@
 		      <i class="fas fa-search"></i> Search
 		    </button>
 		  </div>
+		</div>
+	<% end %>
+	<br>
+	
+	<% @users.each do |user| %>
+		
+		<% if user.promotions.empty? %>
+			<%=  %>
+		<% elsif user.promotions.last.promoted_at == nil %> 
+			<% last_promotion = user.promotions.last.created_at %>
+		<% else %>
+			<% last_promotion = user.promotions.last.promoted_at %>
 		<% end %>
 
-		<!-- Titles for cards -->
-		<div class="row align-items-center mt-1">
-			
-			<div class="col-2 py-3">
-		      <strong></strong>
-		   </div>
-			<div class="col-4 py-3 border-right">
-		      <strong>First Name</strong>
-		   </div>
-		   <div class="col-3 py-3 border-right">
-		      <strong>Last Name</strong>
-		   </div>
-		   <div class="col-3 py-3">
-		      <strong>Belt</strong>
-		   </div>
-		   
-		</div>
-
-		<!-- User cards -->
-		<% @users.each do |user| %>
+		<div class="index-card">
 			<%= link_to user_path(user) do %>
-		  <div class="row align-items-center mt-1 border bg-light">
-		    
-		    <div class="col-2 user-avatar">
-		      <% if user.photo.attached? %>
-		         <%= cl_image_tag user.photo.key, :transformation=>[
-		            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
-		            {:width=>200, :crop=>"scale"}
-		            ], 
-		            class: "avatar", alt: "avatar" %>
-		      <% else %>
-						<div class="default-avatar">
-							<%= image_tag "default_avatar_square.png", class: "avatar", alt: "avatar" %>
+				<div class="flex-grid">
+					<div class="flex-col item1">
+						<% if user.photo.attached? %>
+					         <%= cl_image_tag user.photo.key, :transformation=>[
+					            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
+					            {:width=>200, :crop=>"scale"}
+					            ], 
+					            class: "user-avatar", alt: "user-avatar" %>
+					  <% else %>
+							<div class="default-avatar">
+								<%= image_tag "default_avatar_square.png", class: "user-avatar", alt: "user-avatar" %>
+							</div>
+					  <% end %>
+					</div>
+				
+					<div class="flex-col name-item">
+						<h5><%= user.first_name %> <%= user.last_name %></h5>
+					</div>
+					<div class="flex-col">
+						<!-- empty placeholder -->
+					</div>
+					<div class="flex-col">
+						<% if user.promotions.empty? %>
+							<p>Add belt</p>
+						<% else %>
+						<p><%= user.promotions.last.belt %></p>
+						<% end %>
+					</div>
+					<div class="flex-col">
+						<% if user.promotions.empty? %>
+							<p>No promotions</p>
+						<% else %>
+							<p class="card-text">Prom last:
+								<% if ((Date.today.year * 12 + Date.today.month) - (last_promotion.year * 12 + last_promotion.month).to_i) > 6 %>
+				    			<strong class="red"><%= user.date_diff(last_promotion, Date.today) %></strong>
+				    		<% else %>
+				    			<strong class="green"><%= user.date_diff(last_promotion, Date.today) %></strong>
+				    		<% end %>
+						  </p>
+						<% end %>
+					</div>
+					<div class="flex-col measurements">
+						<div id="weight">
+							<p>Weight: <%= user.weight %>kg</p>
+							<p>Height: <%= user.height %>cm</p>
 						</div>
-		      <% end %>
-		    </div>
-		    <div class="col-4 py-3 border-right">
-		      <%= user.first_name %>
-		    </div>
-		    <div class="col-3 py-3 border-right">
-		      <%= user.last_name %>
-		    </div>
-		    <div class="col-3 py-3">
-		      <%= user.belt %>
-		    </div>
-		  
-		  </div>
-		  <% end %>
-	  <% end %>
-	
-	<!-- Admin or @user logic -->
-	<% else %>
-		<h2>No Access</h2>
-		<p>This page is an admin-only page.</p>
-
-		<%= link_to "Your Profile", user_path(current_user), class: "btn btn-primary" %>
-		<%= link_to "Home Page", root_path, class: "btn btn-primary" %>
+					</div>
+				</div>
+			<% end %>
+		</div>
 	<% end %>
-	<!-- Admin or @user logic -->
+	<br>
 
-	<!-- Pretender gem -->
-	<!-- <ul> -->
-	  <%# @users.each do |user| %>
-	    <!-- <li>Sign in as <%#= link_to user.first_name, impersonate_user_path(user), method: :post %></li> -->
-	  <%# end %>
-	<!-- </ul> -->
+<% else %>
+	<h2>No Access</h2>
+	<p>This page is an admin-only page.</p>
 
-</div>
-
+	<%= link_to "Your Profile", user_path(current_user), class: "btn btn-primary" %>
+	<%= link_to "Home Page", root_path, class: "btn btn-primary" %>
+<% end %>
+<!-- Admin or @user logic -->
 
 

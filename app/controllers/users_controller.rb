@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
 	before_action :set_user, only: [:show, :edit, :update, :destroy]
- 	
+	helper_method :sort_column, :sort_direction
+
 	def index
 		if params[:query].present?
 		  sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
 		  @users = policy_scope(User.where(sql_query, query: "%#{params[:query]}%"))
 		else
-		  @users = policy_scope(User).order(created_at: :desc)
+		  @users = policy_scope(User.order(sort_column + " " + sort_direction))
 		end
 	end
 
@@ -53,5 +54,13 @@ class UsersController < ApplicationController
   def set_user
   	@user = User.find(params[:id])
   	authorize @user
+  end
+
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end

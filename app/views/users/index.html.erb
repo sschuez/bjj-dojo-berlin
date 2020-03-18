@@ -16,9 +16,30 @@
 		      <i class="fas fa-search"></i> Search
 		    </button>
 		  </div>
-		</div>
-	<% end %>
+		<% end %>
+	</div>
 	<br>
+
+	
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<p><%= sortable "first_name" %></p>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col">
+					<p><%= sortable "last_name" %></p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<p><%= sortable "weight" %></p>
+				</div>
+			</div>
+		</div>
+	
+	 
 	
 	<% @users.each do |user| %>
 		

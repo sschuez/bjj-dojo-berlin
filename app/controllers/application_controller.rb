@@ -89,4 +89,5 @@ class ApplicationController < ActionController::Base
       @user.promotions.last.promoted_at 
     end 
   end
+
 end

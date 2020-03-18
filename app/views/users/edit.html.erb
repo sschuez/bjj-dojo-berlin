@@ -147,10 +147,19 @@
 		<!-- Comments cards -->
 			<% if current_user.admin? %>
 
-			<h4 class="ml-3"><strong>Comments</strong></h4>
+			<div class="comments"><h4 class="ml-3"><strong>Comments</strong></h4>
+				<% if @user.comments != [] %>
+					<div class="add-comment">
+						<%= link_to new_user_comment_path(@user, @comment), class: "btn" do %>
+							<i class="fas fa-plus-square"></i>
+						<% end %>
+					</div>
+				<% end %>
+				</div>
+
 				<% if @user.comments.empty? %>
 					<p>
-						<%= "No comments yet" %> <%= link_to edit_user_path(@user), class: "btn" do %>
+						<%= "No comments yet" %> <%= link_to new_user_comment_path(@user, @comment), class: "btn" do %>
 							<i class="fas fa-plus-square"></i>
 						<% end %>
 					</p>
@@ -163,6 +172,23 @@
 																
 										<h5><strong><%= comment.category %>:</strong></h5>
 										<p><%= comment.content %></p>
+										
+										<div class="comment-actions">
+											<div class="icon-edit">
+											<%= link_to edit_user_comment_path(comment.user, comment), class: "btn" do %>
+											  <i class="fas fa-edit"></i>
+											<% end %>
+											</div>
+											
+											<div class="icon-delete">
+												<%= link_to user_comment_path(comment.user, comment),
+												      method: :delete,
+												      data: { confirm: "Are you sure you want to delete this comment?" },
+												      class: "btn" do %>
+														<i class="fas fa-trash-alt"></i>
+												<% end %>
+											</div>
+										</div>
 
 									</div>	
 								</div>

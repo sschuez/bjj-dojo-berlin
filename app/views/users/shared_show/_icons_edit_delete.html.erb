@@ -1,5 +1,13 @@
 <!-- Icons edit & delete top -->
 <div class="icons-top">
+	<% if current_user.admin? %>
+		<div class="icon-back">
+		<%= link_to users_path, class: "btn btn-back" do %>
+			<i class="fas fa-arrow-left"></i>
+		<% end %>
+		</div>
+	<% end %>
+
 	<div class="icon-edit">
 	<%= link_to edit_user_path(@user), class: "btn" do %>
 	  <i class="fas fa-edit"></i>

@@ -49,6 +49,13 @@
 								</div>
 						  <% end %>
 						<% end %>
+						<div class="active-icon">
+					    <% if user.active_member == true %>
+						    <i class="fas fa-check-circle"></i>
+						  <% else %>
+						    <i class="fas fa-times-circle"></i>
+					    <% end %>
+						</div>
 					</div>
 				
 					<div class="flex-col name-item">

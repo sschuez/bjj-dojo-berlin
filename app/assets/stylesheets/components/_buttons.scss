@@ -80,10 +80,77 @@
 	}
 }
 
+.fa-envelope{
+	color: $green;
+}
+
 .btn-promote{
 	margin-top: 12px;
 }
 
+.belt-item{
+	position: relative;
+}
+
+.promote-btn{
+	position: absolute;
+	right: 6px;
+	top: 11px;
+}
+
+.btn-add-belt{
+	border: solid 1px;
+  padding: 3px;
+  font-size: 10px;
+  text-decoration: none;
+  border-radius: 5px;
+  color: black;
+}
+
+.btn-add-belt:hover{
+  text-decoration: none;
+ }
+
+
+ // Smallest device
+ @media (min-width: 100px) and (max-width: 575px) {
+   .promote-btn {
+	  	right: 0px;
+	  	top: -12px;
+   }
+ }
+
+ // Small devices (landscape phones, 576px and up)
+ @media (min-width: 576px) {
+   .promote-btn {
+    	right: 32px;
+    	top: -12px;
+   }
+ }
+
+ // Medium devices (tablets, 768px and up)
+ @media (min-width: 768px) {
+   .promote-btn {
+    	right: 0px;
+    	top: 8px; 
+   }
+ }
+
+ // Large devices (desktops, 992px and up)
+ @media (min-width: 992px) {
+  .promote-btn {
+    right: 6px;
+    top: 8px;
+   }
+ }
+
+ // Extra large devices (large desktops, 1200px and up)
+ @media (min-width: 1200px) {
+  .promote-btn {
+  	right: 6px;
+  	top: 8px;  
+   }
+ }
 
 
 

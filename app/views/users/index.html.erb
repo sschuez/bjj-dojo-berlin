@@ -20,23 +20,60 @@
 	</div>
 	<br>
 
-	
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<p><%= sortable "first_name" %></p>
-				</div>	
-			</div>
-			<div class="row">
-				<div class="col">
-					<p><%= sortable "last_name" %></p>
+<!-- 	["id",
+ "email",
+ "encrypted_password",
+ "reset_password_token",
+ "reset_password_sent_at",
+ "remember_created_at",
+ "created_at",
+ "updated_at",
+ "admin",
+ "first_name",
+ "last_name",
+ "date_of_birth",
+ "phone",
+ "started",
+ "weight",
+ "height",
+ "weight_good",
+ "active_member",
+ "sex"] -->
+		
+
+		<div class="sort-btn-container">
+			<!-- <div class="row"> -->
+				<div class="sort-btn-item">
+					<p class="sort-btn"><%= sortable "first_name" %></p>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<p><%= sortable "weight" %></p>
+				<div class="sort-btn-item">
+					<p class="sort-btn"><%= sortable "last_name" %></p>
 				</div>
-			</div>
+				<div class="sort-btn-item">
+					<p class="sort-btn"><%= sortable "started" %></p>
+				</div>
+
+				<div class="sort-btn-item">
+					<p class="sort-btn"><%= sortable "sex" %></p>
+				</div>
+
+				<div class="sort-btn-item">
+					<p class="sort-btn"><%= sortable "weight" %></p>
+				</div>
+
+				<div class="sort-btn-item">
+					<p class="sort-btn"><%= sortable "height" %></p>
+				</div>
+
+				<div class="sort-btn-item">
+					<p class="sort-btn"><%= sortable "active_member", "Active" %></p>
+				</div>
+
+				<!-- <div class="col">
+					<p class="sort-btn"><%#= sortable "promoted_at" %></p>
+				</div> -->
+
+			<!-- </div> -->
 		</div>
 	
 	 
@@ -56,6 +93,8 @@
 			<%#= link_to user_path(user) do %>
 			
 				<div class="flex-grid">
+					
+					<!-- Avatar -->
 					<div class="flex-col item1">
 						<%= link_to user_path(user) do %>
 							<% if user.photo.attached? %>
@@ -81,6 +120,7 @@
 						</div>
 					</div>
 				
+					<!-- Name -->
 					<div class="flex-col name-item">
 						<%= link_to user_path(user) do %>
 							<h5><%= user.first_name %> <%= user.last_name %></h5>
@@ -89,9 +129,12 @@
 							<% end %>
 						<% end %>
 					</div>
+
+					<!-- empty placeholder -->
 					<div class="flex-col">
-						<!-- empty placeholder -->
 					</div>
+
+					<!-- Belt -->
 					<div class="flex-col belt-item">
 						<% if user.promotions.empty? %>
 							<%= link_to new_user_promotion_path(user), class: "btn btn-add-belt" do  %>
@@ -108,6 +151,8 @@
 							<% end %>	
 						<% end %>
 					</div>
+
+					<!-- Last promotion -->
 					<div class="flex-col">
 						<%= link_to user_path(user) do %>
 							<% if user.promotions.empty? %>
@@ -123,6 +168,8 @@
 							<% end %>
 						<% end %>
 					</div>
+
+					<!-- Measurements -->
 					<div class="flex-col measurements">
 						<%= link_to user_path(user) do %>
 							<div id="weight">

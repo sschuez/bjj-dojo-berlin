@@ -28,6 +28,13 @@
       		<%= @user.phone %>
       	<% end %>
       	</p>
+      <p class="card-text">
+        Sex: <% if @user.sex == "" || @user.sex == nil %>
+          <span class="n-a">n/a</span>
+        <% else %> 
+          <%= @user.sex %>
+        <% end %>
+        </p>
 
     </div>
   

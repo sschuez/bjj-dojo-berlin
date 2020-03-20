@@ -1,3 +1,63 @@
+.sort-btn-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 12px;
+  text-align: center;
+}
+
+.sort-btn-item{
+  flex-grow: 1;
+  align-self: center;
+  align-items: center;
+}
+
+.sort-btn{
+  // padding-right: 12px;
+  // background-repeat: no-repeat;
+  // background-position: right center;
+  // padding: 6px;
+  // font-size: 10px;
+  // text-decoration: none;
+  // border-radius: 2px;
+  // color: black;
+  // :hover{
+  //   background-color: $blue;
+  //   color: white;
+  //   text-decoration: none;
+  // }
+}
+
+.sort-btn .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.sort-btn .asc {
+  background-image: url(/assets/sort-up-solid.svg);
+  margin-left: 6px;
+}
+
+.sort-btn .desc {
+  background-image: url(/assets/sort-down-solid.svg);
+}
+
+
+// .dort-btn .current {
+//   padding-right: 12px;
+//   background-repeat: no-repeat;
+//   background-position: right center;
+// }
+
+// .dort-btn .asc {
+//   background-image: url(/images/up_arrow.gif);
+// }
+
+// .dort-btn .desc {
+//   background-image: url(/images/down_arrow.gif);
+// }
+
 .icons-top{
 	direction: ltr;
 	display: flex;

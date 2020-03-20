@@ -1,7 +1,8 @@
 class PromotionsController < ApplicationController
 
 	def index
-		@promotions = current_user.promotions		
+		@promotions = current_user.promotions
+		# @promotions = policy_scope(Promotion.order(sort_column + " " + sort_direction))
 	end
 
 	def new
@@ -26,6 +27,7 @@ class PromotionsController < ApplicationController
 		redirect_to user_path(@user)
 
 		@belts.index(@user.promotions.last.belt)
+		flash[:notice] = "Successfully promoted #{@user.first_name} to #{@promotion.belt} belt."
 	end
 
 	private
@@ -33,4 +35,13 @@ class PromotionsController < ApplicationController
 	def promotion_params
 		params.require(:promotion).permit(:belt, :promoted_at)
 	end
+
+	# def sort_column
+	#   User.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
+	#   # Promotion.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
+	# end
+	
+	# def sort_direction
+	#   %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+	# end
 end

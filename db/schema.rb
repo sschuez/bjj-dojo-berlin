@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_13_131942) do
+ActiveRecord::Schema.define(version: 2020_03_19_092857) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,11 +71,8 @@ ActiveRecord::Schema.define(version: 2020_03_13_131942) do
     t.integer "weight"
     t.integer "height"
     t.boolean "weight_good"
-    t.string "reasons_for_weight", default: ""
     t.boolean "active_member", default: true
-    t.string "not_active_why", default: ""
-    t.string "belt", default: ""
-    t.date "last_promotion"
+    t.string "sex"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

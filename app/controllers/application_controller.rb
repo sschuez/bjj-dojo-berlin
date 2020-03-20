@@ -50,6 +50,7 @@ class ApplicationController < ActionController::Base
   def set_variable
     @belts = ['White I', 'White II', 'White III', 'White IIII', 'Blue I', 'Blue II', 'Blue III', 'Blue IIII', 'Purple I', 'Purple II', 'Purple III', 'Purple IIII', 'Brown I', 'Brown II', 'Brown III', 'Brown IIII', 'Black I']
     @categories = ['personal info', 'membership', 'promotion', 'weight', 'miscellaneous']
+    @sex = ['male', 'female', 'undefined']
   end
 
   # Name definition for delete alert message

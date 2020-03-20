@@ -8,6 +8,7 @@ class UsersController < ApplicationController
 		  @users = policy_scope(User.where(sql_query, query: "%#{params[:query]}%"))
 		else
 		  @users = policy_scope(User.order(sort_column + " " + sort_direction))
+		  # @promotions = policy_scope(Promotion.order(sort_column + " " + sort_direction))
 		end
 	end
 
@@ -48,7 +49,7 @@ class UsersController < ApplicationController
 	private
 
   def user_params
-    params.require(:user).permit(:email, :first_name, :last_name, :date_of_birth, :phone, :started, :weight, :height, :weight_good, :reasons_for_weight, :active_member, :not_active_why, :belt, :last_promotion, :photo)
+    params.require(:user).permit(:email, :first_name, :last_name, :date_of_birth, :phone, :started, :weight, :height, :weight_good, :active_member, :photo, :sex)
   end
 
   def set_user
@@ -58,6 +59,7 @@ class UsersController < ApplicationController
 
   def sort_column
     User.column_names.include?(params[:sort]) ? params[:sort] : "first_name"
+    # Promotion.column_names.include?(params[:sort]) ? params[:sort] : "created_at"
   end
   
   def sort_direction

@@ -22,11 +22,10 @@
 .default-avatar{
   position: relative;
 }
+
 .avatar-notice {
   position: absolute;
   z-index: +1;
-  right: -0px;
-  top: -10px;
 
   p{
     font-size: 10px;
@@ -45,6 +44,45 @@
 }
 
 
+ // Smallest device
+ @media (min-width: 100px) and (max-width: 575px) {
+  .avatar-notice{
+    left: 25px;
+    top: -15px;
+  }
+ }
+
+ // Small devices (landscape phones, 576px and up)
+ @media (min-width: 576px) {
+  .avatar-notice{
+    left: 70px;
+    top: -5px;
+  }
+ }
+
+ // Medium devices (tablets, 768px and up)
+ @media (min-width: 768px) {
+  .avatar-notice{
+    left: 80px;
+    top: -5px;
+  }  
+ }
+
+ // Large devices (desktops, 992px and up)
+ @media (min-width: 992px) {
+  .avatar-notice{
+    left: 90px;
+    top: -5px;
+  } 
+ }
+
+ // Extra large devices (large desktops, 1200px and up)
+ @media (min-width: 1200px) {
+  .avatar-notice{
+    left: 90px;
+    top: -5px;
+  } 
+ }
 
 
 

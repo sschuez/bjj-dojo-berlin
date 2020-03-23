@@ -141,17 +141,19 @@
 		    </div>
 	 		</div>
 			<br>
-		 
-		  <%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
-		  <%= link_to "Delete Profile", user_path(@user),
-			      method: :delete,
-			      data: { confirm: "Are you sure you want to delete user ##{@user.id} - #{user_name}?" },
-			      class: "btn btn-danger" %>	
-			<% end %>
 		
+			<div>
+				<%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
+				<%= link_to "Delete Profile", user_path(@user),
+				      method: :delete,
+				      data: { confirm: "Are you sure you want to delete user ##{@user.id} - #{user_name}?" },
+				      class: "btn btn-danger" %>	
+			</div>
 		</div>
 		<br>
 			
+		<% end %>
+
 		<!-- Comments cards -->
 		<% if current_user.admin? %>
 

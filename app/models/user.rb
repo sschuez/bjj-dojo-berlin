@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :promotions, dependent: :destroy
-  has_one_attached :photo
+  has_one_attached :photo, dependent: :destroy
 
 	def age?
 		((Time.zone.now - self.date_of_birth.to_time) / 1.year.seconds).floor         	

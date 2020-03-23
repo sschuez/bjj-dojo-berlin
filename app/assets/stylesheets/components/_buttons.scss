@@ -26,21 +26,33 @@
   //   color: white;
   //   text-decoration: none;
   // }
+  a{
+    border: solid 1px;
+    padding: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: black;
+  }
+  :hover{
+     background-color: rgb(255, 251, 242); 
+  }
 }
 
 .sort-btn .current {
   padding-right: 12px;
   background-repeat: no-repeat;
   background-position: right center;
+  background-color: rgb(255, 251, 242);
 }
 
 .sort-btn .asc {
-  background-image: url(/assets/sort-up-solid.svg);
-  margin-left: 6px;
+  background-image: url(/assets/up_arrow.gif);
 }
 
 .sort-btn .desc {
-  background-image: url(/assets/sort-down-solid.svg);
+  background-image: url(/assets/down_arrow.gif);
 }
 
 

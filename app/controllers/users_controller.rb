@@ -9,7 +9,17 @@ class UsersController < ApplicationController
 		else
 		  @users = policy_scope(User.order(sort_column + " " + sort_direction))
 		  # @promotions = policy_scope(Promotion.order(sort_column + " " + sort_direction))
+			
+		  # filters
+			@sex = User.all.pluck(:sex).uniq
+			@active = User.all.pluck(:active_member).uniq
+			@users = @users.where(sex: params[:filter_sex]) if params[:filter_sex].present?
+			@users = @users.where(active_member: params[:filter_active_member]) if params[:filter_active_member].present?
+
 		end
+
+
+
 	end
 
 	def show

@@ -69,6 +69,10 @@
 					<p class="sort-btn"><%= sortable "active_member", "Active" %></p>
 				</div>
 
+				<div class="sort-btn-item">
+					<p class="sort-btn"><%= sortable "admin" %></p>
+				</div>
+
 				<!-- <div class="col">
 					<p class="sort-btn"><%#= sortable "promoted_at" %></p>
 				</div> -->
@@ -77,7 +81,30 @@
 		</div>
 	
 	 
-	
+<!-- 	 <div class="container">
+	  
+	   <form action="/users" class="index-filter custom-dropdown text-center">
+	     <select name="filter_category">
+	       <option value="" disabled selected>female</option>
+	       <option value="" selected>male</option>
+	       <%# @sex.each do |option| %>
+	       <option <%#= 'selected' if params[:filter_sex] == option %> value="<%#= option %>"><%#= option %></option>
+	       <%# end %>
+	     </select>
+
+	       <select name="filter_category">
+	       <option value="" disabled selected>active</option>
+	       <option value="" selected>inactive</option>
+	       <%# @active.each do |option| %>
+	       <option <%#= 'selected' if params[:filter_active_member] == option %> value="<%#= option %>"><%#= option %></option>
+	       <%# end %>
+	     </select>
+
+	     <input type="submit" value="Search">
+	   </form>
+
+	  </div> -->
+				
 	<% @users.each do |user| %>
 		
 		<% if user.promotions.empty? %>

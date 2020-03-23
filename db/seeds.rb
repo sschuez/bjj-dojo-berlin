@@ -6,13 +6,15 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-belts = ['white_1', 'white_2', 'white_3', 'white_4', 'blue_1', 'blue_2', 'blue_3', 'blue_4', 'purple_1', 'purple_2', 'purple_3', 'purple_4', 'brown_1', 'brown_2', 'brown_3', 'brown_4', 'black_1']
+belts = ['White I', 'White II', 'White III', 'White IIII', 'Blue I', 'Blue II', 'Blue III', 'Blue IIII', 'Purple I', 'Purple II', 'Purple III', 'Purple IIII', 'Brown I', 'Brown II', 'Brown III', 'Brown IIII', 'Black I']
+categories = ['personal info', 'membership', 'promotion', 'weight', 'miscellaneous']
+sex = ['male', 'female', 'undefined']
 
 puts 'Deleting all users...'
 User.destroy_all if Rails.env == "DEVELOPMENT"
 
-puts 'Creating Admin...'
-User.create!(
+puts 'Creating Admins...'
+admin1 = User.create!(
 	email: 'stephen.schuez@gmail.com',
 	password: "777jjj",
 	admin: true,
@@ -22,14 +24,47 @@ User.create!(
 	phone: '+41793173399',
 	started: "Tue, 4 Feb, 2020",
 	weight: 74, 														
-	height: 175,																
+	height: 175,
+	sex: "male",																
 	weight_good: true, 										
-	reasons_for_weight:	Faker::Lorem.sentence(word_count: 5),			
+	# reasons_for_weight:	Faker::Lorem.sentence(word_count: 5),			
 	active_member: true, 								
-	not_active_why:	"",							
-	belt: belts[0],																	
-	last_promotion: "Tue, 20 Aug, 2019", 								
+	# not_active_why:	"",							
+	# belt: @belts[0],																	
+	# last_promotion: "Tue, 20 Aug, 2019", 								
 	)
+	promotion = Promotion.new(
+		belt: "White I",
+		promoted_at: "Tue, 20 Aug, 2019",
+		)
+	promotion.user = admin1
+	promotion.save
+
+	admin2 = User.create!(
+	email: 'rodrigo@test.com',
+	password: "aaaaaa",
+	admin: true,
+	first_name: 'Rodrigo',
+	last_name: 'Fernandes',
+	date_of_birth: "",
+	phone: '',
+	started: "",
+	weight: 75, 														
+	height: 175,
+	sex: "male",																
+	weight_good: true, 										
+	# reasons_for_weight:	Faker::Lorem.sentence(word_count: 5),			
+	active_member: true, 								
+	# not_active_why:	"",							
+	# belt: @belts[0],																	
+	# last_promotion: "Tue, 20 Aug, 2019", 								
+	)
+	promotion = Promotion.new(
+		belt: "Black I",
+		promoted_at: "Tue, 20 Aug, 2017",
+		)
+	promotion.user = admin2
+	promotion.save
 
 puts 'Creating 50 users...'
 50.times do
@@ -44,13 +79,30 @@ puts 'Creating 50 users...'
 		started: Faker::Date.between(from: 1000.days.ago, to: Date.today),
 		weight: rand(50..100), 														
 		height: rand(145..190),																
+		sex: sex.sample,																
 		weight_good: Faker::Boolean.boolean(true_ratio: 0.7), 										
-		reasons_for_weight:	Faker::Lorem.sentence(word_count: 5),			
+		# reasons_for_weight:	Faker::Lorem.sentence(word_count: 5),			
 		active_member: Faker::Boolean.boolean(true_ratio: 0.8), 								
-		not_active_why:	Faker::ChuckNorris.fact,							
-		belt: belts.sample,																	
-		last_promotion: Faker::Date.backward(days: 1000),
+		# not_active_why:	Faker::ChuckNorris.fact,							
+		# belt: belts.sample,																	
+		# last_promotion: Faker::Date.backward(days: 1000),
 		)
+	rand(1..5).times do
+		comment = Comment.new(
+			category: categories.sample,
+			content: Faker::ChuckNorris.fact,
+			)
+		comment.user = user
+		comment.save
+	end
+
+	promotion = Promotion.new(
+		belt: belts.sample,
+		promoted_at: Faker::Date.backward(days: 1000),
+		)
+	promotion.user = user
+	promotion.save
+
 end
 puts "Created #{User.count} Users."
 

@@ -21,7 +21,7 @@
 							<%= simple_form_for [user, comment] do |f| %>
 							  <div class="form-group">
 								  <%= f.label "Chose category"%>
-								  <%= f.input :category, collection: @categories, label: false, class: "form-control" %>
+								  <%= f.input :category, collection: @categories, selected: @categories.last, label: false, class: "form-control" %>
 							  </div>
 								<div class="form-group">
 									<%= f.label "Your comment:" %>

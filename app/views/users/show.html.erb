@@ -31,34 +31,41 @@
 		<br>
 
 		<!-- Comments cards -->
-		<% if current_user.admin? %>
 
 		<div class="comments"><h4 class="ml-3"><strong>Comments</strong></h4>
-			<div class="add-comment">
-				<%= link_to new_user_comment_path(@user, @comment), class: "btn" do %>
-					<i class="fas fa-plus-square"></i>
-				<% end %>
-			</div>
-		</div>			
-			<% if @user.comments.empty? %>
-				<p><%= "No comments yet" %></p>
-			<% else %>
-				<% @user.comments.each do |comment| %>
-					<div class="row row-cols-1 row-cols-sm-1">
-						<div class="col mb-4">
-							<div class="card border-0 b rounded-lg shadow-sm comment-card">
-								<div class="card-body">
-															
-									<h5><strong><%= comment.category %>:</strong></h5>
-									<p><%= comment.content %></p>
-									
-									<div class="comment-actions">
+			<% if policy(@user.comments).new? %>
+				<div class="add-comment">
+					<%= link_to new_user_comment_path(@user, @comment), class: "btn" do %>
+						<i class="fas fa-plus-square"></i>
+					<% end %>
+				</div>
+			<% end %>
+		</div>
+
+		<% if @user.comments.empty? %>
+			<p><%= "No comments yet" %></p>
+		<% else %>
+			<% @user.comments.each do |comment| %>
+				<div class="row row-cols-1 row-cols-sm-1">
+					<div class="col mb-4">
+						<div class="card border-0 b rounded-lg shadow-sm comment-card">
+							
+							<div class="card-body">
+								<h5><strong><%= comment.category %>:</strong></h5>
+								<p><%= comment.content %></p>
+								
+								<div class="comment-actions">
+									<!-- Edit button -->
+									<% if policy(comment).edit? %>
 										<div class="icon-edit">
 										<%= link_to edit_user_comment_path(comment.user, comment), class: "btn" do %>
 										  <i class="fas fa-edit"></i>
 										<% end %>
 										</div>
-										
+									<% end %>
+								
+									<!-- Delete button -->
+									<% if policy(comment).destroy? %>
 										<div class="icon-delete">
 											<%= link_to user_comment_path(comment.user, comment),
 											      method: :delete,
@@ -67,21 +74,23 @@
 													<i class="fas fa-trash-alt"></i>
 											<% end %>
 										</div>
-										
-									</div>
-
-								</div>	
-							
-								<div class="updated-at comments-standalone">
-										<p id="updated-standalone">Updated on: <%= comment.updated_at.strftime("%d.%m.%Y") %></p>
+									<% end %>
 								</div>
 
+							</div>	
+						
+							<!-- Updated on: -->
+							<div class="updated-at comments-standalone">
+									<p id="updated-standalone">Updated on: <%= comment.updated_at.strftime("%d.%m.%Y") %></p>
 							</div>
+
 						</div>
 					</div>
-				<% end %>
+				</div>
+			
 			<% end %>
 		<% end %>
+		<%# end %>
 
 	
 	<!-- Admin or @user logic -->

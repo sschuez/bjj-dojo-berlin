@@ -48,8 +48,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_variable
-    @belts = ['White I', 'White II', 'White III', 'White IIII', 'Blue I', 'Blue II', 'Blue III', 'Blue IIII', 'Purple I', 'Purple II', 'Purple III', 'Purple IIII', 'Brown I', 'Brown II', 'Brown III', 'Brown IIII', 'Black I']
-    @categories = ['personal info', 'membership', 'promotion', 'weight', 'miscellaneous']
+    @belts = ['White', 'White I', 'White II', 'White III', 'White IIII', 'Blue', 'Blue I', 'Blue II', 'Blue III', 'Blue IIII', 'Purple', 'Purple I', 'Purple II', 'Purple III', 'Purple IIII', 'Brown', 'Brown I', 'Brown II', 'Brown III', 'Brown IIII', 'Black']
+    @categories = ['personal info', 'membership', 'promotion', 'weight', 'training', 'competition', 'miscellaneous']
     @sex = ['male', 'female', 'undefined']
   end
 

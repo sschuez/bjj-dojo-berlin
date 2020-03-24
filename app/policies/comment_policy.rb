@@ -12,19 +12,19 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def new?
-    @user == user || user.admin
+    user.admin
   end
 
   def create?
-    @user == user || user.admin
+    user.admin
   end
 
   def update?
-    user.admin?
+    user.admin
   end
 
   def destroy?
-    user.admin?
+    user.admin
   end
 
   private

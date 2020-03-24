@@ -121,34 +121,37 @@
 			<div class="col mb-4">
 		    <div class="card bg-secondary border-0 b rounded-lg shadow-sm">
 		      <div class="card-body">
+		        
 		        <h5 class="card-title"><strong>Measurements</strong></h5>
 		        <br>
 		        <div class="form-group">
-		        <p class="card-text">
-		        	<%= f.label "Height in cm:" %>
-		        	<%= f.number_field :height, class: "form-control" %></p>
-		        <p class="card-text">
-		        	<%= f.label "Weight in kg:" %>
-		        	<%= f.number_field :weight, class: "form-control" %></p>
-		        <% if current_user.admin? %>
-		        	<p class="card-text">
-			        	<%= f.label "Weight good?" %>
-			        	<%= f.check_box :weight_good, class: "form-control" %>
-		        	</p>
+			        <p class="card-text">
+			        	<%= f.label "Height in cm:" %>
+			        	<%= f.number_field :height, class: "form-control" %></p>
+			        <p class="card-text">
+			        	<%= f.label "Weight in kg:" %>
+			        	<%= f.number_field :weight, class: "form-control" %></p>
+			        <% if current_user.admin? %>
+			        	<p class="card-text">
+				        	<%= f.label "Weight good?" %>
+				        	<%= f.check_box :weight_good, class: "form-control" %>
+			        	</p>
+		        	<% end %>
 		        </div>
-		        <% end %>
+		      
 		      </div>
 		    </div>
 	 		</div>
 			<br>
 		
-			<div>
-				<%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
-				<%= link_to "Delete Profile", user_path(@user),
-				      method: :delete,
-				      data: { confirm: "Are you sure you want to delete user ##{@user.id} - #{user_name}?" },
-				      class: "btn btn-danger" %>	
-			</div>
+		</div>
+			
+		<div>
+			<%= f.button :submit, "Update Profile", class: "btn btn-primary" %>
+			<%= link_to "Delete Profile", user_path(@user),
+			      method: :delete,
+			      data: { confirm: "Are you sure you want to delete user ##{@user.id} - #{user_name}?" },
+			      class: "btn btn-danger" %>	
 		</div>
 		<br>
 			
@@ -223,7 +226,7 @@
 	<% end %>
 	<!-- Admin or @user logic -->
 
-</div>
+	</div>
 
 
   <!-- not_active_why:													(string) -->

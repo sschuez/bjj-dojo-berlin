@@ -8,6 +8,12 @@
 		</div>
 	<% end %>
 
+	<% if current_user != @user %>
+		<div class="impersonate">
+			<%= link_to "Impersonate", impersonate_user_path(@user), method: :post %>
+		</div>
+	<% end %>
+
 	<div class="icon-edit">
 	<%= link_to edit_user_path(@user), class: "btn" do %>
 	  <i class="fas fa-edit"></i>

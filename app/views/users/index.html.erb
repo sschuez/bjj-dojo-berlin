@@ -222,13 +222,6 @@
 <% end %>
 <!-- Admin or @user logic -->
 
-<ul>
-	<% @users.each do |user| %>
-		<li>
-			Sign in as <%= link_to user.first_name, impersonate_user_path(user), method: :post %>
-		</li>
-	<% end %>
-</ul>
 
 
 

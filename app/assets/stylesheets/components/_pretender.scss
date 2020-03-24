@@ -9,9 +9,10 @@
 	a{
 		text-decoration: none;
 		border: solid 1px;
+		border-color: $danger;
 		border-radius: 4px;
 		padding: 3px;
-		color: $dark;
+		color: $danger;
 		margin-left: 12px;
 
 	}
@@ -47,3 +48,44 @@
  @media (min-width: 1200px) {
   
  }
+
+.impersonate{
+	border: solid 1px;
+	vertical-align: middle;
+	padding-top: 1px;
+	padding-left: 3px;
+	padding-right: 3px;
+	height: 28px;
+	border-radius: 4px;
+	background-color: $info;
+	border-color: $danger;
+
+	a{
+		text-decoration: none;	
+		color: $danger;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

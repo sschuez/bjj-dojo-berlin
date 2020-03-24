@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   def stop_impersonating
     stop_impersonating_user
-    redirect_to root_path, notice: "Successfully stopped impersonating."
+    redirect_to users_path, notice: "Stopped impersonating."
     authorize current_user
   end
 

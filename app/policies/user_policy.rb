@@ -27,6 +27,14 @@ class UserPolicy < ApplicationPolicy
   	user_is_owner_or_admin?
   end
 
+  def impersonate?
+    user.admin
+  end
+
+  def stop_impersonating?
+    true
+  end
+
   private
 
   def user_is_owner_or_admin?

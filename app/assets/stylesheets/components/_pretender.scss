@@ -1,0 +1,49 @@
+.pretender {
+	width: 100%;
+	height: 40px;
+	color: $dark;
+	background-color: $info;
+	text-align: center;
+	padding: 9px;
+
+	a{
+		text-decoration: none;
+		border: solid 1px;
+		border-radius: 4px;
+		padding: 3px;
+		color: $dark;
+		margin-left: 12px;
+
+	}
+	a:hover{
+		background-color: orange;
+	}
+}
+
+// Smallest device
+ @media (min-width: 100px) and (max-width: 575px) {
+	.pretender {
+		font-size: 12px;
+		padding-top: 12px;
+	}   
+ }
+
+ // Small devices (landscape phones, 576px and up)
+ @media (min-width: 576px) {
+   
+ }
+
+ // Medium devices (tablets, 768px and up)
+ @media (min-width: 768px) {
+    
+ }
+
+ // Large devices (desktops, 992px and up)
+ @media (min-width: 992px) {
+  
+ }
+
+ // Extra large devices (large desktops, 1200px and up)
+ @media (min-width: 1200px) {
+  
+ }

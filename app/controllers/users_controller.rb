@@ -17,9 +17,6 @@ class UsersController < ApplicationController
 			@users = @users.where(active_member: params[:filter_active_member]) if params[:filter_active_member].present?
 
 		end
-
-
-
 	end
 
 	def show
@@ -43,16 +40,18 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: "Profile of #{user_name} successfully deleted"
 	end
 
-	# def impersonate
- #    user = User.find(params[:id])
- #    impersonate_user(user)
- #    redirect_to root_path
- #  end
+	def impersonate
+    user = User.find(params[:id])
+    impersonate_user(user)
+    # redirect_to root_path
+    authorize user
+  end
 
- #  def stop_impersonating
- #    stop_impersonating_user
- #    redirect_to root_path
- #  end
+  def stop_impersonating
+    stop_impersonating_user
+    redirect_to root_path, notice: "Successfully stopped impersonating."
+    authorize current_user
+  end
 
   
 

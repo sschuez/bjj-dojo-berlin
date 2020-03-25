@@ -37,7 +37,7 @@ class ApplicationController < ActionController::Base
       redirect_to user_path(current_user), notice: "You are now impersonating #{current_user.first_name} #{current_user.last_name}."
     else
       flash[:alert] = "You are not authorized to perform this action."
-      redirect_to(root_path)
+      redirect_to(request.referrer || root_path)
     end
   end
   

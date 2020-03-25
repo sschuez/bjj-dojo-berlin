@@ -11,9 +11,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-        <!-- <li class="nav-item active">
+        <!-- <li class="nav-item active"> -->
           <%#= link_to "Home", root_path, class: "nav-link" %>
-        </li> -->
+        <!-- </li> -->
+        <!-- <li class="nav-item active"> -->
+          <%#= link_to "Competitions", competitions_path, class: "nav-link" %>
+        <!-- </li> -->
           
         <li class="nav-item dropdown">
 
@@ -33,11 +36,13 @@
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
               <%= link_to "Users", users_path, class: "dropdown-item" %>
+              <%= link_to "Competitions", competitions_path, class: "dropdown-item" %>
               <%= link_to "Admin", rails_admin_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           <% else %>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
               <%= link_to "Profile", user_path(current_user), class: "dropdown-item" %>
+              <%= link_to "Competitions", competitions_path, class: "dropdown-item" %>
               <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             <% end %>
           </div>

@@ -10,7 +10,6 @@ class CompetitionsController < ApplicationController
 	end
 
 	def create
-		
 		@competition = Competition.new(competition_params)
 		authorize @competition
 		@competition.save

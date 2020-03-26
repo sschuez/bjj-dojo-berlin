@@ -2,13 +2,21 @@ class CompetitionsController < ApplicationController
 
 	def index
 		@competitions = policy_scope(Competition)
-		# authorize @competitions
 	end
 
 	def new
+		@competition = Competition.new
+		authorize @competition
 	end
 
 	def create
+		
+		@competition = Competition.new(competition_params)
+		authorize @competition
+		@competition.save
+
+		redirect_to competitions_path
+		flash[:notice] = "Created competition #{@competition.name.capitalize}"
 	end
 
 	def show
@@ -26,6 +34,6 @@ class CompetitionsController < ApplicationController
 	private
 
 	def competition_params
-		params.require(:promotion).permit(:name, :date, :location, :info, :registration_start, :registration_end)
+		params.require(:competition).permit(:name, :date, :location, :info, :registration_start, :registration_end)
 	end
 end

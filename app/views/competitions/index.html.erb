@@ -1,20 +1,44 @@
 <div class="container">
 	
-	<h3>Upcoming competitions</h3>
-	<br>
+	<h2>Upcoming competitions</h2>
 	
-	<% @competitions.each do |competition| %>
-		<div class="card-trip">
-		  <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-		  <div class="card-trip-infos">
-		    <div>
-		      <h2><%= competition.name %></h2>
-		      <p><%= competition.info %></p>
-		    </div>
-		    <h2 class="card-trip-pricing">£99.99</h2>
-		    <img src="https://kitt.lewagon.com/placeholder/users/krokrob" class="card-trip-user avatar-bordered" />
-		  </div>
-		</div>
-	<% end %>
+	<% if @competitions.empty? || @competitions == nil %>
+		<p>No upcoming competitions</p>
+	<% else %>
+		<% @competitions.each do |competition| %>
+			<div class="card-trip">
+			  <%= image_tag "bjj_default1" %>
+			  <div class="card-trip-infos">
+			    <div>
+			      <h2><%= competition.name %></h2>
+			      <h6><%= competition.location %>, <%= competition.date.strftime("%d.%m.%Y") %></h6>
+			      <p style="margin-bottom: 12px;"><%= competition.info %></p>
+			      <p>Go to <%= link_to "website", "http://#{competition.website}" %></p>
+			      
+						<!-- Registration period logic -->
+						<% if (competition.registration_start - Date.today).to_i < 1 && (competition.registration_end - Date.today).to_i > 0 %>
+							<p>Registration is <span style="color: #1EDD88; font-weight: bold;">open</span></p>
+						<% elsif competition.registration_start == nil || (competition.registration_end - Date.today).to_i < 0 %>
+							<p>Registration period <span style="color: #FD1015; font-weight: bold;">n/a</span> or <span style="color: #FD1015; font-weight: bold;">passed</span>, please check <%= link_to "website", "http://#{competition.website}" %></p>
+						<% else %>
+			      	<p style="font-style: italic">Registration open in <strong><%= (competition.registration_start - Date.today).to_i %> days</strong> (on <%= competition.registration_start.strftime("%d.%m.%Y") %>)</p>
+			      <% end %>
+						
+						<!-- Registration deadline logic -->
+						<% if competition.registration_end == nil || (competition.registration_end - Date.today).to_i < 0 %>
+							<p>Registration deadline <span style="color: #FD1015; font-weight: bold;">n/a</span> or <span style="color: #FD1015; font-weight: bold;">passed</span>, please check <%= link_to "website", "http://#{competition.website}" %></p>
+						<% else %>
+			      	<p style="font-style: italic">Registration closes in <strong><%= (competition.registration_end - Date.today).to_i %> days</strong> (on <%= competition.registration_end.strftime("%d.%m.%Y") %>)</p>
+			      <% end %>
+			    <div class="sign-up" style="display: flex;">
+			    	<div class="btn-competition">
+			    		<%= link_to "Sign up", "#", class: "btn btn-primary btn-competition" %>
+			   		</div>
+			    </div>
 
+			    </div>
+			  </div>
+			</div>
+		<% end %>
+	<% end %>
 </div>

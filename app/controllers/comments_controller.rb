@@ -25,7 +25,6 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     authorize @comment
-    # we need `user_id` to associate comment with corresponding user
     @user = User.find(params[:user_id])
     @comment.user = @user
     @comment.save

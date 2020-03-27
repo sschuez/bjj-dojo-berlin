@@ -39,6 +39,15 @@
   }
 }
 
+.card-trip-infos .card-trip-edit{
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	.btn{
+		color: $orange;
+	}
+}
+
 .card-trip-infos .card-trip-user {
   position: absolute;
   right: 16px;
@@ -46,7 +55,9 @@
   width: 40px;
 }
 
-   
+.errors-container{
+	color: $red;
+} 
 
 
  // Smallest device

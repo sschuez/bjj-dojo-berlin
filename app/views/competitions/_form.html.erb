@@ -6,44 +6,69 @@
 			<br>
 
 			<%= simple_form_for(@competition) do |f| %>
-			<div class="form-group">
-				<%= f.label "Name of competiton" %>
-				<%= f.input :name, label: false, class: "form-control" %>
-			</div>
 
-			<div class="form-group">
-				<%= f.label "Date" %>
-				<%= f.date_field :date, label: false, class: "form-control" %>
-			</div>
+				<% if @competition.errors.any? %>
+					<div class="errors-container">
+						<ul>
+						  <% @competition.errors.full_messages.each do |message| %>
+						      <li><%= message %></li>
+						    <% end %>
+						  </ul>
+					</div>
+				<% end %>	
 
-			<div class="form-group">
-				<%= f.label "Location" %>
-				<%= f.input :location, label: false, class: "form-control" %>
-			</div>
-			
-			<div class="form-group">
-				<%= f.label "Information" %>
-				<%= f.text_field :info, placeholder: "Add any info relevant to the competition", label: false, class: "form-control" %>
-			</div>
-			
-			<div class="form-group">
-				<%= f.input :website, placeholder: "www.your-competiton.com", class: "form control" %>
-			</div>
+				<div class="form-group">
+					<%= f.label "Name of competiton*" %>
+					<%= f.input :name, label: false, class: "form-control" %>
+				</div>
 
-			<div class="form-group">
-				<%= f.label "Registration open" %>
-				<%= f.date_field :registration_start, label: false, class: "form-control" %>
-			</div>
+				<div class="form-group">
+					<%= f.label "Date*" %>
+					<%= f.date_field :date, label: false, class: "form-control" %>
+				</div>
+
+				<div class="form-group">
+					<%= f.label "Location*" %>
+					<%= f.input :location, label: false, class: "form-control" %>
+				</div>
+				
+				<div class="form-group">
+					<%= f.label "Information" %>
+					<%= f.text_field :info, placeholder: "Add any info relevant to the competition", label: false, class: "form-control" %>
+				</div>
+				
+				<div class="form-group">
+					<%= f.input :website, placeholder: "www.your-competiton.com", class: "form control" %>
+				</div>
+
+				<div class="form-group">
+					<%= f.label "Registration open" %>
+					<%= f.date_field :registration_start, label: false, class: "form-control" %>
+				</div>
 
 
-			<div class="form-group">
-				<%= f.label "Registration close" %>
-				<%= f.date_field :registration_end, label: false, class: "form-control" %>
-			</div>
+				<div class="form-group">
+					<%= f.label "Registration close" %>
+					<%= f.date_field :registration_end, label: false, class: "form-control" %>
+				</div>
 
-			<%= f.submit "Add competition", class: "btn btn-primary" %>
+				<div class="form-group">
+					<%= f.input :photo, as: :file, class: "form-control" %>
+				</div>
+
+				<% if @competition.errors.any? %>
+					<div class="errors-container">
+						<ul>
+						  <% @competition.errors.full_messages.each do |message| %>
+						      <li><%= message %></li>
+						    <% end %>
+						  </ul>
+					</div>
+				<% end %>	
+
+				<%= f.submit "Add competition", class: "btn btn-primary" %>
 			<% end %>
-			
+				
 		</div>		
 	</div>
 </div>

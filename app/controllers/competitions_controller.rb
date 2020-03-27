@@ -12,19 +12,35 @@ class CompetitionsController < ApplicationController
 	def create
 		@competition = Competition.new(competition_params)
 		authorize @competition
-		@competition.save
-
-		redirect_to competitions_path
-		flash[:notice] = "Created competition #{@competition.name.capitalize}"
+		
+		if @competition.save
+			redirect_to competition_path(@competition)
+			flash[:notice] = "Created competition #{@competition.name.upcase}"
+		else
+			render :new
+		end
 	end
 
 	def show
+		@competition = Competition.find(params[:id])
+		authorize @competition
 	end
 
 	def edit
+		@competition = Competition.find(params[:id])
+		authorize @competition
 	end
 
 	def update
+		@competition = Competition.find(params[:id])
+		authorize @competition
+		
+		if @competition.update(competition_params)
+			redirect_to competition_path(@competition)
+			flash[:notice] = "Updated competition #{@competition.name.upcase}"
+		else
+			render :edit
+		end
 	end
 
 	def destroy
@@ -33,6 +49,6 @@ class CompetitionsController < ApplicationController
 	private
 
 	def competition_params
-		params.require(:competition).permit(:name, :date, :location, :info, :registration_start, :registration_end)
+		params.require(:competition).permit(:name, :date, :location, :info, :registration_start, :registration_end, :photo)
 	end
 end

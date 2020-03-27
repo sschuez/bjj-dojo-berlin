@@ -1,0 +1,62 @@
+<div class="container">
+	<div class="card-trip">
+		
+		<% if @competition.photo.attached? %>
+	  	<%= cl_image_tag @competition.photo.key, height: 300, width: 1000, crop: :fill %>
+	  <% else %>
+	  	<%= image_tag "bjj_default1.jpg" %>
+	  <% end %>
+
+		<div class="card-trip-infos">
+	    
+	    <div class="card-trip-edit">
+	    	<%= link_to edit_competition_path(@competition), class: "btn" do %>
+	    	  <i class="fas fa-edit"></i>
+	    	<% end %>
+	    </div>
+
+	    <div>
+	      <h2><%= @competition.name %></h2>
+	      <h6><%= @competition.location %>, <%= @competition.date.strftime("%d.%m.%Y") %></h6>
+	      
+	      <p style="margin-bottom: 12px;">
+					<%  if @competition.info == nil %>
+						<%=  %>
+					<% else %>
+	      		<%= @competition.info %>
+	      	<% end %>
+	      </p>
+
+	      <% if @competition.website == nil %>
+	      	<p>No website inserted</p>
+	      <% else %>
+	      	<p>Go to <%= link_to "website", "http://#{@competition.website}", target: :_blank %></p>
+	      <% end %>
+	      
+				<!-- Registration period logic -->
+				<% if (@competition.registration_start - Date.today).to_i < 1 && (@competition.registration_end - Date.today).to_i > 0 %>
+					<p>Registration is <span style="color: #1EDD88; font-weight: bold;">open</span></p>
+				<% elsif @competition.registration_start == nil || (@competition.registration_end - Date.today).to_i < 0 %>
+					<p>Registration period <span style="color: #FD1015; font-weight: bold;">n/a</span> or <span style="color: #FD1015; font-weight: bold;">passed</span>, please check website</p>
+				<% else %>
+	      	<p style="font-style: italic">Registration open in <strong><%= (@competition.registration_start - Date.today).to_i %> days</strong> (on <%= @competition.registration_start.strftime("%d.%m.%Y") %>)</p>
+	      <% end %>
+				
+				<!-- Registration deadline logic -->
+				<% if @competition.registration_end == nil || (@competition.registration_end - Date.today).to_i < 0 %>
+					<p>Registration deadline <span style="color: #FD1015; font-weight: bold;">n/a</span> or <span style="color: #FD1015; font-weight: bold;">passed</span>, please check website</p>
+				<% else %>
+	      	<p style="font-style: italic">Registration closes in <strong><%= (@competition.registration_end - Date.today).to_i %> days</strong> (on <%= @competition.registration_end.strftime("%d.%m.%Y") %>)</p>
+	      <% end %>
+
+		    <div class="sign-up" style="display: flex;">
+		    	<div class="btn-competition">
+		    		<%= link_to "Sign up", "#", class: "btn btn-primary btn-competition" %>
+		   		</div>
+		    </div>
+			</div>
+		
+		</div>
+	
+	</div>
+</div>

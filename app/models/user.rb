@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   has_many :comments, dependent: :destroy
   has_many :promotions, dependent: :destroy
+  has_many :competition_appointments, dependent: :destroy
+  has_many :competitions, through: :competition_appointments
   has_one_attached :photo, dependent: :destroy
 
 	def age?

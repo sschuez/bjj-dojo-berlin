@@ -1,6 +1,15 @@
 <div class="container">
+	
+	<div class="update-top">
+		<div>
+		<%= link_to competitions_path, class: "btn btn-back" do %>
+			<i class="fas fa-arrow-left"></i>
+		<% end %>
+		</div>
+	</div>
+
 	<div class="card-trip">
-		
+
 		<% if @competition.photo.attached? %>
 	  	<%= cl_image_tag @competition.photo.key, height: 300, width: 1000, crop: :fill %>
 	  <% else %>
@@ -10,8 +19,15 @@
 		<div class="card-trip-infos">
 	    
 	    <div class="card-trip-edit">
-	    	<%= link_to edit_competition_path(@competition), class: "btn" do %>
+	    	<%= link_to edit_competition_path(@competition), class: "btn btn-edit" do %>
 	    	  <i class="fas fa-edit"></i>
+	    	<% end %>
+	    	
+	    	<%= link_to competition_path(@competition),
+	    	      method: :delete,
+	    	      data: { confirm: "Are you sure you want to delete competition ##{@competition.id} - #{@competition.name.upcase}?" },
+	    	      class: "btn btn-delete" do %>
+	    			<i class="fas fa-trash-alt"></i>
 	    	<% end %>
 	    </div>
 
@@ -50,13 +66,70 @@
 	      <% end %>
 
 		    <div class="sign-up" style="display: flex;">
-		    	<div class="btn-competition">
-		    		<%= link_to "Sign up", "#", class: "btn btn-primary btn-competition" %>
+					<div class="btn-competition">
+						<% if @competition.users.include?(current_user) %>
+		   				<p><strong>Registered <i class="fas fa-check-circle"></i></strong></p>
+		   			<% else %>
+		    			<%= link_to "Register", new_competition_competition_appointment_path(@competition), class: "btn btn-primary btn-competition" %>
+		   			<% end %>
 		   		</div>
 		    </div>
+				
+			</div>
+		</div>
+	</div>
+
+	<div class="card-trip">
+		<div class="card-trip-participants">
+			
+			<div><h2>Participants</h2></div>	
+			<div class="competition-show">
+
+				<% @competition.competition_appointments.each do |appointment| %>
+				
+					<div class="competition-appointment">
+						<%= link_to competition_competition_appointment_path(appointment), class: "competition-appointment-link" do %>
+							<div>
+								<p><strong><%= appointment.user.first_name %> <%= appointment.user.last_name %></strong> | Registered <%= appointment.created_at.strftime("%d.%m.%Y") %></p>
+							</div>
+						<% end %>
+
+						<% if policy(appointment).update? %>
+							<%= link_to edit_competition_competition_appointment_path(@competition, appointment) do %>
+								<i class="fas fa-edit"></i>
+							<% end %>
+						<% end %>
+
+						<% if policy(appointment).destroy? %>
+							<%= link_to competition_competition_appointment_path(@competition, appointment) do %>
+								<i class="fas fa-trash-alt"></i>
+							<% end %>
+						<% end %>
+
+					</div>
+				
+				<% end %>
+			
 			</div>
 		
 		</div>
-	
 	</div>
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

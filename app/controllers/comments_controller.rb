@@ -58,6 +58,8 @@ class CommentsController < ApplicationController
   def destroy
     @user = User.find(params[:user_id])
     @comment = Comment.find(params[:id])
+    authorize @comment
+    
     @comment.destroy
 
     redirect_to user_path(@user)
@@ -66,7 +68,6 @@ class CommentsController < ApplicationController
     else
       flash[:notice] = "Deleted comment in category #{@comment.category.upcase}."
     end
-    authorize @comment
   end
 
   private

@@ -13,19 +13,6 @@
 }
 
 .sort-btn{
-  // padding-right: 12px;
-  // background-repeat: no-repeat;
-  // background-position: right center;
-  // padding: 6px;
-  // font-size: 10px;
-  // text-decoration: none;
-  // border-radius: 2px;
-  // color: black;
-  // :hover{
-  //   background-color: $blue;
-  //   color: white;
-  //   text-decoration: none;
-  // }
   a{
     border: solid 1px;
     padding: 3px;
@@ -55,21 +42,6 @@
   background-image: image-url('down-arrow.png');
 }
 
-
-// .dort-btn .current {
-//   padding-right: 12px;
-//   background-repeat: no-repeat;
-//   background-position: right center;
-// }
-
-// .dort-btn .asc {
-//   background-image: url(/images/up_arrow.gif);
-// }
-
-// .dort-btn .desc {
-//   background-image: url(/images/down_arrow.gif);
-// }
-
 .icons-top{
 	direction: ltr;
 	display: flex;
@@ -83,10 +55,18 @@
 	}
 }
 
+.fa-edit{
+  color: $orange;
+}
+
 .icon-delete{
 	.btn{
 		color: $red;
 	}
+}
+
+.fa-trash-alt{
+  color: $red;
 }
 
 .icon-back{

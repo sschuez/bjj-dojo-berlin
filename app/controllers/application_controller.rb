@@ -53,8 +53,29 @@ class ApplicationController < ActionController::Base
 
   def set_variable
     @belts = ['White', 'White I', 'White II', 'White III', 'White IIII', 'Blue', 'Blue I', 'Blue II', 'Blue III', 'Blue IIII', 'Purple', 'Purple I', 'Purple II', 'Purple III', 'Purple IIII', 'Brown', 'Brown I', 'Brown II', 'Brown III', 'Brown IIII', 'Black']
+    @belt_class = ['White', 'Blue', 'Purple', 'Brown', 'Black']
     @categories = ['personal info', 'membership', 'promotion', 'weight', 'training', 'competition', 'miscellaneous']
     @sex = ['male', 'female', 'undefined']
+    @weight_class_male = [
+      "Rooster (m) – 57.5 kg",
+      "Light Feather (m) – 64 kg",
+      "Feather (m) – 70 kg",
+      "Light (m) – 76 kg",
+      "Middle (m) – 82.3 kg",
+      "Medium Heavy (m) – 88.3 kg",
+      "Heavy (m) – 94.3 kg",
+      "Super-Heavy (m) – 100.5 kg",
+      "Ultra Heavy (m) – No Maximum Weight"
+    ]
+    @weight_class_female = [
+      "Light Feather (f) – 53.5 kg ",
+      "Feather (f) – 58.5 kg ",
+      "Light (f) – 64 kg ",
+      "Middle (f) – 69 kg ",
+      "Medium Heavy (f) – 74 kg ",
+      "Heavy (f) – No Maximum Weight"
+    ]
+
   end
 
   # Name definition for delete alert message

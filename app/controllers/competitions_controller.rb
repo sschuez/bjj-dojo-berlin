@@ -34,7 +34,7 @@ class CompetitionsController < ApplicationController
 	def update
 		@competition = Competition.find(params[:id])
 		authorize @competition
-		
+
 		if @competition.update(competition_params)
 			redirect_to competition_path(@competition)
 			flash[:notice] = "Updated competition #{@competition.name.upcase}"
@@ -44,11 +44,18 @@ class CompetitionsController < ApplicationController
 	end
 
 	def destroy
+		@competition = Competition.find(params[:id])
+		authorize @competition
+
+		@competition.destroy
+
+		redirect_to competitions_path
+		flash[:notice] = "Deleted competition #{@competition.name.upcase}"
 	end
 
 	private
 
 	def competition_params
-		params.require(:competition).permit(:name, :date, :location, :info, :registration_start, :registration_end, :photo)
+		params.require(:competition).permit(:name, :website, :date, :location, :info, :registration_start, :registration_end, :photo)
 	end
 end

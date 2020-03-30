@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_25_085541) do
+ActiveRecord::Schema.define(version: 2020_03_27_145058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,19 @@ ActiveRecord::Schema.define(version: 2020_03_25_085541) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "competition_appointments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "competition_id", null: false
+    t.string "weight_class"
+    t.string "belt_class"
+    t.integer "result"
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["competition_id"], name: "index_competition_appointments_on_competition_id"
+    t.index ["user_id"], name: "index_competition_appointments_on_user_id"
   end
 
   create_table "competitions", force: :cascade do |t|
@@ -91,5 +104,7 @@ ActiveRecord::Schema.define(version: 2020_03_25_085541) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
+  add_foreign_key "competition_appointments", "competitions"
+  add_foreign_key "competition_appointments", "users"
   add_foreign_key "promotions", "users"
 end

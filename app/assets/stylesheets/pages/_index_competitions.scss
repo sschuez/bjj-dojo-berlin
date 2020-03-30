@@ -18,6 +18,7 @@
   margin: 0;
 }
 
+
 .card-trip p {
   font-size: 12px;
   opacity: .7;
@@ -36,16 +37,39 @@
   }
   p{
   	margin-bottom: 6px;
+    color: black;
   }
+  a.competition-name{
+    text-decoration: none;
+    color: black;
+  }
+  a{
+    text-decoration: none;
+  }
+}
+
+.card-trip-participants{
+  margin: 12px;
+  h2{
+    margin-bottom: 6px;
+  }
+}
+
+.competition-show{
+  // border-bottom: 1px solid;
+  // margin-top: 60px;
 }
 
 .card-trip-infos .card-trip-edit{
 	position: absolute;
 	right: 10px;
 	top: 10px;
-	.btn{
+	.btn-edit{
 		color: $orange;
 	}
+  .btn-delete{
+    color: $danger;
+  }
 }
 
 .card-trip-infos .card-trip-user {
@@ -59,6 +83,11 @@
 	color: $red;
 } 
 
+.btn-competition{
+  strong{
+    color: $green;
+  }
+}
 
  // Smallest device
  @media (min-width: 100px) and (max-width: 575px) {
@@ -79,7 +108,7 @@
      	position: absolute;
      	bottom: 10px;
      	right: 10px;
-     	width: 120px;
+     	// width: 120px;
      }
    }
  }

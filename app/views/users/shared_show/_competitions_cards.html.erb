@@ -22,6 +22,11 @@
 							<h5><strong><%= competition.name %></strong></h5>
 							<p><%= competition.location %>, <%= competition.date.strftime("%d.%m.%Y") %></p>
 						<% end %>
+							<% if competition.competition_appointments.find_by(user: @user.id).comment.present? %>
+								<%= link_to competition_competition_appointment_path(competition, competition.competition_appointments.find_by(user: @user.id)) do %>
+									<p style="font-style: italic; margin-top: 5px;">Comment: <%= competition.competition_appointments.find_by(user: @user.id).comment %></p>
+								<% end %>
+							<% end %>
 
 						<div class="comment-actions">
 							<!-- Edit button -->

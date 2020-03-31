@@ -8,4 +8,6 @@ class Competition < ApplicationRecord
 	validates :date, presence: true
 	validates :registration_start, presence: true
 	validates :registration_end, presence: true
+
+	include Filterable
 end

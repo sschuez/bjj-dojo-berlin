@@ -2,8 +2,31 @@ class CompetitionsController < ApplicationController
 	before_action :set_competition, only: [:show, :edit, :update, :destroy]
 	
 	def index
-		@competitions = policy_scope(Competition)
+		@competitions = policy_scope(Competition).order(date: :asc)
+
+		# @competitions = policy_scope(Competition).filter(params.slice(:date, :location, :registration_end))
+		# @products = Product.filter(params.slice(:status, :location, :starts_with))		
+
+		# @upcoming = policy_scope(Competition).pluck()
 	end
+
+
+	# if params[:query].present?
+	#   sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
+	#   @users = policy_scope(User.where(sql_query, query: "%#{params[:query]}%"))
+	# else
+	#   @users = policy_scope(User.order(sort_column + " " + sort_direction))
+	#   # @promotions = policy_scope(Promotion.order(sort_column + " " + sort_direction))
+		
+	#   # filters
+	# 	@sex = User.all.pluck(:sex).uniq
+	# 	@active = User.all.pluck(:active_member).uniq
+	# 	@users = @users.where(sex: params[:filter_sex]) if params[:filter_sex].present?
+	# 	@users = @users.where(active_member: params[:filter_active_member]) if params[:filter_active_member].present?
+	# end
+
+
+
 
 	def new
 		@competition = Competition.new

@@ -15,7 +15,6 @@ class UsersController < ApplicationController
 			@active = User.all.pluck(:active_member).uniq
 			@users = @users.where(sex: params[:filter_sex]) if params[:filter_sex].present?
 			@users = @users.where(active_member: params[:filter_active_member]) if params[:filter_active_member].present?
-
 		end
 	end
 

@@ -1,6 +1,15 @@
 <div class="container">
 	
-	<h4>Upcoming competitions</h4>
+	<div class="update-top">
+		<div>
+			<h4>Ucoming competitions (<%= @competitions.count %>)</h4>
+		</div>
+		<div>
+			<%= link_to "Add competition", new_competition_path, class: "btn btn-primary" %>
+		</div>
+	</div>
+			<br>
+	
 	
 	<% if @competitions.empty? || @competitions == nil %>
 		<p>No upcoming competitions</p>

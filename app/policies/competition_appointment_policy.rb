@@ -11,6 +11,10 @@ class CompetitionAppointmentPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+  	true
+  end
+
   def create?
   	user == user || user.admin
   end

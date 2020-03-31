@@ -1,16 +1,21 @@
 class CompetitionAppointmentsController < ApplicationController
 	before_action :require_login
+	before_action :set_competition_appointment, only: [:show, :edit, :update, :destroy]
+	before_action :set_current_user_appointment, only: [:new, :create]
 
 	def new
-		@user = current_user
-		@competition = Competition.find(params[:competition_id])
+		set_current_user_appointment
 		@competition_appointment = CompetitionAppointment.new
 		authorize @competition_appointment	
 	end
 
+	def show
+		set_competition_appointment
+		authorize @competition_appointment
+	end
+
 	def create
-		@user = current_user
-		@competition = Competition.find(params[:competition_id])
+		set_current_user_appointment
 		@competition_appointment = CompetitionAppointment.new(competition_appointment_params)
 		authorize @competition_appointment
 
@@ -22,16 +27,12 @@ class CompetitionAppointmentsController < ApplicationController
 	end
 
 	def edit
-		@user = CompetitionAppointment.find(params[:id]).user
-		@competition = Competition.find(params[:competition_id])
-		@competition_appointment = CompetitionAppointment.find(params[:id])
+		set_competition_appointment
     authorize @competition_appointment
 	end
 
 	def update
-		@user = CompetitionAppointment.find(params[:id]).user
-		@competition = Competition.find(params[:competition_id])
-		@competition_appointment = CompetitionAppointment.find(params[:id])
+		set_competition_appointment
 		authorize @competition_appointment
 
 		if @competition_appointment.update(competition_appointment_params)
@@ -42,8 +43,27 @@ class CompetitionAppointmentsController < ApplicationController
 		end
 	end
 
+	def destroy
+		set_competition_appointment
+		authorize @competition_appointment
+
+		@competition_appointment.destroy
+		redirect_to competition_path(@competition)
+		flash[:notice] = "Deregistered #{@user.first_name.upcase} #{@user.last_name.upcase} from competition #{@competition.name.upcase}"		
+	end
 
 	private
+
+	def set_current_user_appointment
+		@user = current_user
+		@competition = Competition.find(params[:competition_id])
+	end
+
+	def set_competition_appointment
+		@user = CompetitionAppointment.find(params[:id]).user
+		@competition = Competition.find(params[:competition_id])
+		@competition_appointment = CompetitionAppointment.find(params[:id])
+	end
 
 	def require_login
     unless signed_in?

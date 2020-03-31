@@ -79,35 +79,42 @@
 		</div>
 	</div>
 
+	
 	<div class="card-trip">
 		<div class="card-trip-participants">
 			
 			<div><h2>Participants</h2></div>	
 			<div class="competition-show">
-
-				<% @competition.competition_appointments.each do |appointment| %>
 				
-					<div class="competition-appointment">
-						<%= link_to competition_competition_appointment_path(appointment), class: "competition-appointment-link" do %>
-							<div>
-								<p><strong><%= appointment.user.first_name %> <%= appointment.user.last_name %></strong> | Registered <%= appointment.created_at.strftime("%d.%m.%Y") %></p>
-							</div>
-						<% end %>
-
-						<% if policy(appointment).update? %>
-							<%= link_to edit_competition_competition_appointment_path(@competition, appointment) do %>
-								<i class="fas fa-edit"></i>
+				<% if @competition.competition_appointments.empty? %>
+					<p>No participants registered so far</p>
+				<% else %>
+					<% @competition.competition_appointments.each do |appointment| %>
+					
+						<div class="competition-appointment">
+							<%= link_to competition_competition_appointment_path(@competition, appointment), class: "competition-appointment-link" do %>
+								<div>
+									<p><strong><%= appointment.user.first_name %> <%= appointment.user.last_name %></strong> | Registered <%= appointment.created_at.strftime("%d.%m.%Y") %></p>
+								</div>
 							<% end %>
-						<% end %>
 
-						<% if policy(appointment).destroy? %>
-							<%= link_to competition_competition_appointment_path(@competition, appointment) do %>
-								<i class="fas fa-trash-alt"></i>
+							<% if policy(appointment).update? %>
+								<%= link_to edit_competition_competition_appointment_path(@competition, appointment) do %>
+									<i class="fas fa-edit"></i>
+								<% end %>
 							<% end %>
-						<% end %>
 
-					</div>
-				
+							<% if policy(appointment).destroy? %>
+								<%= link_to competition_competition_appointment_path(@competition, appointment),
+										      method: :delete,
+										      data: { confirm: "Are you sure you want to remove registration for #{@competition.name.upcase} for #{appointment.user.first_name.upcase} #{appointment.user.last_name.upcase}?" } do %>
+									<i class="fas fa-trash-alt"></i>
+								<% end %>
+							<% end %>
+
+						</div>
+					
+					<% end %>
 				<% end %>
 			
 			</div>

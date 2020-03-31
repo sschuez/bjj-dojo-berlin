@@ -6,4 +6,6 @@ class Competition < ApplicationRecord
 	validates :name, presence: true
 	validates :location, presence: true
 	validates :date, presence: true
+	validates :registration_start, presence: true
+	validates :registration_end, presence: true
 end

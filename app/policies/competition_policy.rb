@@ -24,11 +24,11 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def update?
-    true
+    record.created_by == user.first_name + ' ' + user.last_name || user.admin
   end
 
   def destroy?
-    true
+    user.admin
   end
 
 end

@@ -11,6 +11,7 @@ class CompetitionsController < ApplicationController
 
 	def create
 		@competition = Competition.new(competition_params)
+		@competition.created_by = current_user.first_name + ' ' + current_user.last_name
 		authorize @competition
 		
 		if @competition.save
@@ -56,6 +57,6 @@ class CompetitionsController < ApplicationController
 	private
 
 	def competition_params
-		params.require(:competition).permit(:name, :website, :date, :location, :info, :registration_start, :registration_end, :photo)
+		params.require(:competition).permit(:name, :create_by, :website, :date, :location, :info, :registration_start, :registration_end, :photo)
 	end
 end

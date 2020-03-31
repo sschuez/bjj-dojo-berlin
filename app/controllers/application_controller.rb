@@ -33,12 +33,12 @@ class ApplicationController < ActionController::Base
   # Uncomment when you *really understand* Pundit!
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   def user_not_authorized
-    if current_user != true_user
-      redirect_to user_path(current_user), notice: "You are now impersonating #{current_user.first_name} #{current_user.last_name}."
-    else
+    # if current_user != true_user
+      # redirect_to user_path(current_user), notice: "You are now impersonating #{current_user.first_name} #{current_user.last_name}."
+    # else
       flash[:alert] = "You are not authorized to perform this action."
       redirect_to(request.referrer || root_path)
-    end
+    # end
   end
   
   private

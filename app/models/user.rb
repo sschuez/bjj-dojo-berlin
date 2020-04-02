@@ -22,6 +22,20 @@ class User < ApplicationRecord
 
     # include PgSearch::Model
     #   multisearchable against: [:sex, :active]
+    
+  def last_promotion
+    if self.promotions.empty?
+      return Date.today
+    elsif self.promotions.last.promoted_at == nil  
+      return self.promotions.last.created_at 
+    else 
+      return self.promotions.last.promoted_at 
+    end 
+  end
+
+  def promotion_time
+    (Date.today.year * 12 + Date.today.month) - (last_promotion.year * 12 + last_promotion.month).to_i
+  end
 
 	def age?
 		((Time.zone.now - self.date_of_birth.to_time) / 1.year.seconds).floor         	

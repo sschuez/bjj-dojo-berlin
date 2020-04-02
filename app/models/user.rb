@@ -10,6 +10,19 @@ class User < ApplicationRecord
   has_many :competitions, through: :competition_appointments
   has_one_attached :photo, dependent: :destroy
 
+  include PgSearch::Model 
+  pg_search_scope :global_search,
+    against: [ :active_member, :sex ],
+    associated_against: {
+      promotions: [ :belt ]
+    },
+    using: {
+      tsearch: {any_word: true}
+    }
+
+    # include PgSearch::Model
+    #   multisearchable against: [:sex, :active]
+
 	def age?
 		((Time.zone.now - self.date_of_birth.to_time) / 1.year.seconds).floor         	
 	end

@@ -2,196 +2,123 @@
 <% if current_user.admin? %>
 
 	<div class="container">
-		<!-- Search bar -->
-		<%= simple_form_for :search, url: users_path, method: :get do |f| %>
-		  <div class="search-form-control form-group">
-				<%= text_field_tag :query,
-			    params[:query],
-			    class: "form-control string required",
-			    type: "text",
-			    id: "search_query",
-			    placeholder: "Find a user (#{@users.count})"
-		  	%>
-		    <button name="button" type="submit" class="btn btn-primary">
-		      <i class="fas fa-search"></i> Search
-		    </button>
-		  </div>
-		<% end %>
-	</div>
-	<br>
 
-		<div class="sort-btn-container">
-			<!-- <div class="row"> -->
-				<div class="sort-btn-item">
-					<p class="sort-btn"><%= sortable "first_name" %></p>
-				</div>
-				<div class="sort-btn-item">
-					<p class="sort-btn"><%= sortable "last_name" %></p>
-				</div>
-				<div class="sort-btn-item">
-					<p class="sort-btn"><%= sortable "started" %></p>
-				</div>
-
-				<div class="sort-btn-item">
-					<p class="sort-btn"><%= sortable "sex" %></p>
-				</div>
-
-				<div class="sort-btn-item">
-					<p class="sort-btn"><%= sortable "weight" %></p>
-				</div>
-
-				<div class="sort-btn-item">
-					<p class="sort-btn"><%= sortable "height" %></p>
-				</div>
-
-				<div class="sort-btn-item">
-					<p class="sort-btn"><%= sortable "active_member", "Active" %></p>
-				</div>
-
-				<div class="sort-btn-item">
-					<p class="sort-btn"><%= sortable "admin" %></p>
-				</div>
-
-				<!-- <div class="col">
-					<p class="sort-btn"><%#= sortable "promoted_at" %></p>
-				</div> -->
-
-			<!-- </div> -->
-		</div>
-	
-	 
-<!-- 	 <div class="container">
-	  
-	   <form action="/users" class="index-filter custom-dropdown text-center">
-	     <select name="filter_category">
-	       <option value="" disabled selected>female</option>
-	       <option value="" selected>male</option>
-	       <%# @sex.each do |option| %>
-	       <option <%#= 'selected' if params[:filter_sex] == option %> value="<%#= option %>"><%#= option %></option>
-	       <%# end %>
-	     </select>
-
-	       <select name="filter_category">
-	       <option value="" disabled selected>active</option>
-	       <option value="" selected>inactive</option>
-	       <%# @active.each do |option| %>
-	       <option <%#= 'selected' if params[:filter_active_member] == option %> value="<%#= option %>"><%#= option %></option>
-	       <%# end %>
-	     </select>
-
-	     <input type="submit" value="Search">
-	   </form>
-
-	  </div> -->
-				
-	<% @users.each do |user| %>
+	<%= simple_form_for :search, url: users_path, method: "GET", remote: true do |f| %>
+	<button onclick="myFunction()" class=filter-btn>Filters</button>
 		
-		<% if user.promotions.empty? %>
-			<%=  %>
-		<% elsif user.promotions.last.promoted_at == nil %> 
-			<% last_promotion = user.promotions.last.created_at %>
-		<% else %>
-			<% last_promotion = user.promotions.last.promoted_at %>
-		<% end %>
-
-		<div class="index-card">
-
-			<%#= link_to user_path(user) do %>
-			
-				<div class="flex-grid">
-					
-					<!-- Avatar -->
-					<div class="flex-col item1">
-						<%= link_to user_path(user) do %>
-							<% if user.photo.attached? %>
-						         <%= cl_image_tag user.photo.key, :transformation=>[
-						            {:width=>200, :height=>200, :gravity=>"face", :radius=>"max", :crop=>"thumb"},
-						            {:width=>200, :crop=>"scale"}
-						            ], 
-						            class: "user-avatar", alt: "user-avatar" %>
-						  <% else %>
-								<div class="default-avatar">
-									<%= image_tag "default_avatar_square.png", class: "user-avatar", alt: "user-avatar" %>
-								</div>
-						  <% end %>
-						<% end %>
-						<div class="active-icon">
-							<%= link_to edit_user_path(user) do %>
-						    <% if user.active_member == true %>
-							    <i class="fas fa-check-circle"></i>
-							  <% else %>
-							    <i class="fas fa-times-circle"></i>
-						    <% end %>
-					    <% end %>
-						</div>
-					</div>
-				
-					<!-- Name -->
-					<div class="flex-col name-item">
-						<%= link_to user_path(user) do %>
-							<h5><%= user.first_name %> <%= user.last_name %></h5>
-							<%= mail_to user.email, class: "btn" do %>
-								<i class="far fa-envelope"></i>
-							<% end %>
-						<% end %>
-					</div>
-
-					<!-- empty placeholder -->
-					<div class="flex-col">
-					</div>
-
-					<!-- Belt -->
-					<div class="flex-col belt-item">
-						<% if user.promotions.empty? %>
-							<%= link_to new_user_promotion_path(user), class: "btn btn-add-belt" do  %>
-								<p>Add belt</p>
-							<% end %>
-						<% else %>
-							<p><%= user.promotions.last.belt %></p>
-							<% if user.promotions.last.belt != @belts.last %>
-								<div class="promote-btn">
-									<%= link_to new_user_promotion_path(user), class: "btn" do %>
-										<i class="fas fa-plus-square"></i>
-									<% end %>
-								</div>
-							<% end %>	
-						<% end %>
-					</div>
-
-					<!-- Last promotion -->
-					<div class="flex-col">
-						<%= link_to user_path(user) do %>
-							<% if user.promotions.empty? %>
-								<p>No promotions</p>
-							<% else %>
-								<p class="card-text">Prom last:
-									<% if ((Date.today.year * 12 + Date.today.month) - (last_promotion.year * 12 + last_promotion.month).to_i) > 6 %>
-					    			<strong class="red"><%= user.date_diff(last_promotion, Date.today) %></strong>
-					    		<% else %>
-					    			<strong class="green"><%= user.date_diff(last_promotion, Date.today) %></strong>
-					    		<% end %>
-							  </p>
-							<% end %>
-						<% end %>
-					</div>
-
-					<!-- Measurements -->
-					<div class="flex-col measurements">
-						<%= link_to user_path(user) do %>
-							<div id="weight">
-								<p>Weight: <%= user.weight %>kg</p>
-								<p>Height: <%= user.height %>cm</p>
-							</div>
-						<% end %>
-					</div>
-				</div>
-
-			<%# end %>
-		
-		</div>
+  <%= link_to users_path do %>
+  	<i class="fas fa-redo-alt"></i>
 	<% end %>
-	<br>
+	
+	<!-- Filter card -->
+	<div class="filter-card" id="myDIV" style="display: none;">
+    <div class="filter-btn-container">
+      <div class="filter-btn-item">
+        <%= f.input :active_member, label: "Active",  collection: [true, false], as: :check_boxes %>
+      </div>
+      
+      <div class="filter-btn-item">
+        <%= f.input :sex, label: "Sex", collection: @sex, as: :check_boxes %>
+      </div>
 
+      <div class="filter-btn-item">
+        <%= f.input :belt, label: "Promtn",  collection: ["> 6m", "> 9m", "> 12m"], as: :check_boxes %>
+      </div>
+
+      <div class="filter-btn-item">
+        <%= f.input :weight, label: "Weight", collection: @weights, as: :check_boxes %>
+      </div>
+
+      <div class="filter-btn-item">
+        <%= f.input :height, label: "Height", collection: @heights, as: :check_boxes %>
+      </div>
+
+      <div class="filter-btn-item">
+        <%= f.input :belt, label: "Belt",  collection: @belt_colours, as: :check_boxes %>
+      </div>
+
+			<div class="filter-btn-item">
+        <%= f.submit "Search", hidden: true, class: "btn btn-primary" %>
+    	</div>
+    </div>
+  </div>
+  <% end %>
+
+	<!-- Search bar -->
+	<%= simple_form_for :search, url: users_path, method: :get do |f| %>
+	  <div class="search-form-control form-group">
+			<%= text_field_tag :query,
+		    params[:query],
+		    class: "form-control string required",
+		    type: "text",
+		    id: "search_query",
+		    placeholder: "Find a user (#{@users.count})"
+	  	%>
+	    <button name="button" type="submit" class="btn btn-primary">
+	      <i class="fas fa-search"></i> Search
+	    </button>
+	  </div>
+	<% end %>
+
+	<script>
+	function myFunction() {
+	  var x = document.getElementById("myDIV");
+	  if (x.style.display === "none") {
+	    x.style.display = "block";
+	  } else {
+	    x.style.display = "none";
+	  }
+	}
+	</script>
+
+  <div id="users">
+  	<div>
+    <%= render 'user', users: @users %>
+    </div>
+  </div>
+	<br>
+	<br>
+		
+	<!-- Old sortable logic -->
+	<!-- 	<div class="sort-btn-container">
+
+			<div class="sort-btn-item">
+				<p class="sort-btn"><%#= sortable "first_name" %></p>
+			</div>
+			<div class="sort-btn-item">
+				<p class="sort-btn"><%#= sortable "last_name" %></p>
+			</div>
+			<div class="sort-btn-item">
+				<p class="sort-btn"><%#= sortable "started" %></p>
+			</div>
+
+			<div class="sort-btn-item">
+				<p class="sort-btn"><%#= sortable "sex" %></p>
+			</div>
+
+			<div class="sort-btn-item">
+				<p class="sort-btn"><%#= sortable "weight" %></p>
+			</div>
+
+			<div class="sort-btn-item">
+				<p class="sort-btn"><%#= sortable "height" %></p>
+			</div>
+
+			<div class="sort-btn-item">
+				<p class="sort-btn"><%#= sortable "active_member", "Active" %></p>
+			</div>
+
+			<div class="sort-btn-item">
+				<p class="sort-btn"><%#= sortable "admin" %></p>
+			</div>
+
+			<div class="col">
+				<p class="sort-btn"><%#= sortable "promoted_at" %></p>
+			</div>
+
+		</div> -->
+	
+<!-- Admin or @user logic -->
 <% else %>
 	<h2>No Access</h2>
 	<p>This page is an admin-only page.</p>
@@ -199,10 +126,6 @@
 	<%= link_to "Your Profile", user_path(current_user), class: "btn btn-primary" %>
 	<%= link_to "Home Page", root_path, class: "btn btn-primary" %>
 <% end %>
-<!-- Admin or @user logic -->
-
-
-
 
 
 

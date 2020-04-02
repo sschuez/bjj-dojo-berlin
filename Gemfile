@@ -21,6 +21,7 @@ gem 'webpacker'
 gem 'cloudinary', '~> 1.12.0'
 gem 'pundit'
 gem 'pretender'
+gem 'pg_search'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

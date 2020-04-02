@@ -1,3 +1,39 @@
+.filter-btn{
+  border: none;
+  padding: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.filter-btn:hover{
+    background-color: rgb(255, 251, 242);
+    cursor: pointer;
+  }
+
+form{
+  a{
+    margin-left: 20px;
+    margin-bottom: 12px;
+  }
+}
+
+.filter-btn-container{
+  display: grid;
+  // flex-wrap: wrap;
+  justify-content: center;
+  margin: 12px;
+  // text-align: center;
+}
+
+.filter-btn-item{
+  flex-grow: 1;
+  // align-self: center;
+  // align-items: center;
+  margin-left: 12px;
+}
+
+
 .sort-btn-container{
   display: flex;
   flex-wrap: wrap;
@@ -22,6 +58,7 @@
     text-decoration: none;
     color: black;
   }
+
   :hover{
      background-color: rgb(255, 251, 242); 
   }
@@ -177,6 +214,12 @@
 	  	right: 0px;
 	  	top: -12px;
    }
+   .filter-btn-container{
+    grid-template-columns: 1fr 1fr 1fr; 
+   }
+   .filter-btn{
+    background-color: white;
+   } 
  }
 
  // Small devices (landscape phones, 576px and up)
@@ -184,6 +227,9 @@
    .promote-btn {
     	right: 32px;
     	top: -12px;
+   }
+   .filter-btn-container{
+    grid-template-columns: 1fr 1fr 1fr; 
    }
  }
 
@@ -193,6 +239,9 @@
     	right: 0px;
     	top: 8px; 
    }
+   .filter-btn-container{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
+   }
  }
 
  // Large devices (desktops, 992px and up)
@@ -201,6 +250,9 @@
     right: 6px;
     top: 8px;
    }
+   .filter-btn-container{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+   }
  }
 
  // Extra large devices (large desktops, 1200px and up)
@@ -208,6 +260,9 @@
   .promote-btn {
   	right: 6px;
   	top: 8px;  
+   }
+   .filter-btn-container{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; 
    }
  }
 

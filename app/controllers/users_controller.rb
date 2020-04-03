@@ -3,9 +3,8 @@ class UsersController < ApplicationController
 	helper_method :sort_column, :sort_direction
 
 	def index
-
 		if params["search"]
-      @filter = params["search"]["active_member"].concat(params["search"]["sex"]).concat(params["search"]["belt"]).concat(params["search"]["weight"]).concat(params["search"]["height"]).flatten.reject(&:blank?)
+      @filter = params["search"]["active_member"].concat(params["search"]["sex"]).concat(params["search"]["belt"]).flatten.reject(&:blank?)
       @users = policy_scope(User.all.global_search("#{@filter}").order(first_name: :desc))
     elsif params[:query].present?
     	sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
@@ -17,6 +16,8 @@ class UsersController < ApplicationController
       format.html
       format.js
     end
+
+    #.concat(params["search"]["weight"]).concat(params["search"]["height"])
 
 		# skip_policy_scope
 		

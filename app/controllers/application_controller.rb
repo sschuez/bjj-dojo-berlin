@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
     @belts = ['White', 'White I', 'White II', 'White III', 'White IIII', 'Blue', 'Blue I', 'Blue II', 'Blue III', 'Blue IIII', 'Purple', 'Purple I', 'Purple II', 'Purple III', 'Purple IIII', 'Brown', 'Brown I', 'Brown II', 'Brown III', 'Brown IIII', 'Black']
     @belt_colours = [ 'White', 'Blue', 'Purple','Brown','Black']
     @belt_class = ['White', 'Blue', 'Purple', 'Brown', 'Black']
-    @weights = ["-50", "50-60", "60-70", "70-80", "80-90", "90-100", "100-"]
+    @weights = [54, (40..50), (50..60), (60..70), (70..80), (80..90), (90..100)]
     @heights = ["-150", "150-60", "160-70", "170-80", "180-90", "190-200", "200-"]
     @categories = ['personal info', 'membership', 'promotion', 'weight', 'training', 'competition', 'miscellaneous']
     @sex = ['male', 'female', 'undefined']

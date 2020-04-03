@@ -4,29 +4,17 @@ class CompetitionsController < ApplicationController
 	def index
 		@competitions = policy_scope(Competition).order(date: :asc)
 
-		# @competitions = policy_scope(Competition).filter(params.slice(:date, :location, :registration_end))
-		# @products = Product.filter(params.slice(:status, :location, :starts_with))		
-
-		# @upcoming = policy_scope(Competition).pluck()
+		if params["search"]
+      @filter = params["search"]["date"].concat(params["search"]["date"]).concat(params["search"]["date"]).flatten.reject(&:blank?)
+      @competitions = policy_scope(Competition.all.order(date: :asc).date_search("#{@filter}")).order(date: :asc)
+    else
+      @competitions = policy_scope(Competition).upcoming.order(date: :asc)
+    end
+    respond_to do |format|
+      format.html
+      format.js
+    end
 	end
-
-
-	# if params[:query].present?
-	#   sql_query = "first_name ILIKE :query OR last_name ILIKE :query"
-	#   @users = policy_scope(User.where(sql_query, query: "%#{params[:query]}%"))
-	# else
-	#   @users = policy_scope(User.order(sort_column + " " + sort_direction))
-	#   # @promotions = policy_scope(Promotion.order(sort_column + " " + sort_direction))
-		
-	#   # filters
-	# 	@sex = User.all.pluck(:sex).uniq
-	# 	@active = User.all.pluck(:active_member).uniq
-	# 	@users = @users.where(sex: params[:filter_sex]) if params[:filter_sex].present?
-	# 	@users = @users.where(active_member: params[:filter_active_member]) if params[:filter_active_member].present?
-	# end
-
-
-
 
 	def new
 		@competition = Competition.new

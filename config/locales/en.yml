@@ -30,4 +30,17 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  global:
+    menu:
+      home: "home"
+      about: "about"
+
+
+  static_pages:
+    index:
+      beyond-the-gym: 
+        
+        "The Japanese word DOJO (dōjō (道場)) literally means 'place of the way' and we have recreated this concept in our gym. A DOJO is a place for immersive learning, healing, and meditation.
+        Using powerful holistic tools such as Brazilian Jiu-Jitsu, Movement, and Yoga we apply this Dojo concept at the heart of Berlin-Neukölln. Our goal is to promote a safe, welcoming, injury-free and family friendly environment so that we improve not only our technical qualities but along the journey or thoughts, words and actions.
+        We are affiliated with CheckMat and we look forward to meet each CheckMat brother and sister, who is visiting Berlin.
+        ... and If you are looking for a new BJJ School in Berlin, come to a trial class!"

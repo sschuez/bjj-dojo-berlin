@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   
   devise_for :users 
@@ -19,6 +19,11 @@ Rails.application.routes.draw do
     resources :competition_appointments
   end
   
-  root to: 'pages#home'
+  
+    root to: 'pages#home'
+    get 'about', to: 'pages#about'
+  end
+ 
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

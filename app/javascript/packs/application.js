@@ -3,6 +3,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("packs/switch")
 require("packs/filter")
+require("packs/navbar.js")
 
 import "bootstrap";
 
